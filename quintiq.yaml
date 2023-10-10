@@ -49,7 +49,7 @@
     ignore_errors: yes
 
   - name: Install/Upgrade model
-    win_command: qk new server D:\Quicosolution642.qproject
+    win_command: qk new server model D:\Quicosolution642.qproject
     args:
       chdir: d:\quintiq\bin\
     register: qk_model
