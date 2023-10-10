@@ -56,7 +56,7 @@
   
   - name: Extract the model name from the result
     set_fact:
-      model_name: "{{ win_command_result.stdout | regex_search('(?:\\w+ upgraded|Installed \\((\\w+)\\))') | default('Not found') }}"
+      model_name: "{{ qk_model.stdout | regex_search('(?:\\w+ upgraded|Installed \\((\\w+)\\))') | default('Not found') }}"
   
   - name: Set active model
     win_command: qk set server model {{ model_name }}
@@ -64,7 +64,7 @@
       chdir: d:\quintiq\bin\
     register: qk_model_active
     when: qk_model.changed
-    
+
   - name: New configset [Common,qod,HostName]
     win_command: qk new server configset [Common,qod,$env:computername] --local
     args:
