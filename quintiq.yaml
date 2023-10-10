@@ -43,26 +43,26 @@
     when: qk_sitekey.changed
 
   - name: License
-    win_command: qk.exe set server license D:\quintiq_keys\{{ sitekey }}_license.txt --addrw --overwritelicense --overwritemappings
+    win_command: qk set server license D:\quintiq_keys\{{ sitekey }}_license.txt --addrw --overwritelicense --overwritemappings
     args:
       chdir: d:\quintiq\bin\
     ignore_errors: yes
 
   - name: Install/Upgrade model
-    win_command: qk.exe new server "D:\Quicosolution642.qproject"
+    win_command: qk new server "D:\Quicosolution642.qproject"
     args:
       chdir: d:\quintiq\bin\
     register: qk_model
   
   - name: New configset [Common,qod,HostName]
-    win_command: qk.exe new server configset [Common,qod,$env:computername] --local
+    win_command: qk new server configset [Common,qod,$env:computername] --local
     args:
       chdir: d:\quintiq\bin\
     register: qk_configset_new
     when: qk_model.changed
   
   - name: Set configset [Common,qod,HostName]
-    win_command: qk.exe set server configset [Common,qod,$env:computername]
+    win_command: qk set server configset [Common,qod,$env:computername]
     args:
       chdir: d:\quintiq\bin\
     register: qk_configset_set
