@@ -56,8 +56,8 @@
   
   - name: Extract the model name from the result
     set_fact:
-      model_name: "{{ qk_model.stdout | regex_search('(?:\\w+ upgraded|Installed \\((\\w+)\\))') | default('Not found') }}"
-  
+      model_name: "{{ qk_model.stdout | regex_search('(?:\\w+ upgraded|Installed \\((\\w+)\\))', '\\1') | default('Not found') }}"
+
   - name: Set active model
     win_command: qk set server model {{ model_name }}
     args:
