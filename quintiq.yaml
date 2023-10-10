@@ -61,15 +61,22 @@
     register: qk_model_active
     when: qk_model.changed
 
+  - name: Set active model
+    win_command: qk set server model Quicosolution
+    args:
+      chdir: d:\quintiq\bin\
+    register: qk_model_active
+    when: qk_model.changed
+
   - name: New configset [Common,qod,HostName]
-    win_command: qk new server configset [Common,qod,$env:computername] --local
+    win_command: qk new server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}] --local
     args:
       chdir: d:\quintiq\bin\
     register: qk_configset_new
     when: qk_model.changed
   
   - name: Set configset [Common,qod,HostName]
-    win_command: qk set server configset [Common,qod,$env:computername]
+    win_command: qk set server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
     args:
       chdir: d:\quintiq\bin\
     register: qk_configset_set
