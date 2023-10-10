@@ -1,0 +1,9 @@
+- name: "Create myansible folder in d: drive"
+  win_file:
+    path: d:\myansible
+    state: directory
+
+- name: Copy README.md file over to the myansible folder
+  win_copy:
+    src: README.md
+    dest: d:\myansible\README.md

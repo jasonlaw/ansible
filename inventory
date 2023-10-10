@@ -1,1 +1,10 @@
-sdcvwdel41 ansible_shell_type=powershell
+all:
+  vars:
+    ansible_shell_type: powershell
+
+quintiq:
+  hosts:
+    qae:
+      ansible_host: sdcvwdel41
+    tce:
+      ansible_host: sdcvwdscdm01

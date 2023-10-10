@@ -1,0 +1,49 @@
+---
+
+- hosts: qae
+  tasks:
+
+  - name: Check if the file exists
+    win_stat:
+      path: "d:\\quintiq\\default.qworkspace"
+    register: qworkspace_file_info
+    ignore_errors: yes
+  
+  - name: Create default workspace
+    win_command: qk new workspace default
+    args:
+      chdir: d:\QUINTIQ\bin\
+    register: qk_workspace
+    when: qworkspace_file_info.stat.exists is not defined or not qworkspace_file_info.stat.exists
+
+#  - name: Set owner
+#    win_owner:
+#      path: d:\QUINTIQ\default.qworkspace
+#      user: jlw1
+#    when: qk_workspace.changed
+  
+  - name: Check if the file exists
+    win_stat:
+      path: "d:\\quintiq\\server.key"
+    register: sitekey_file_info
+    ignore_errors: yes
+
+
+  - name: New sitekey
+    win_command: qk new server sitekey {{ q_sitekey }} d:\quintiq\server.key
+    args:
+      chdir: d:\QUINTIQ\bin\
+    register: qk_sitekey
+    when: sitekey_file_info.stat.exists is not defined or not sitekey_file_info.stat.exists
+
+  - name: Set sitekey
+    win_command: qk set server sitekey {{ q_sitekey }}
+    args:
+      chdir: d:\QUINTIQ\bin\
+    when: qk_sitekey.changed
+
+  - name: License
+    win_command: qk.exe set server license D:\quintiq_keys\{{ q_sitekey }}_license.txt --addrw --overwritelicense --overwritemappings
+    args:
+      chdir: d:\quintiq\bin\
+    ignore_errors: yes
