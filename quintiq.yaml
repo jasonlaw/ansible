@@ -3,7 +3,7 @@
 - hosts: qae
   tasks:
 
-  - name: Check if the file exists
+  - name: Check if the workspace file exists
     win_stat:
       path: "d:\\quintiq\\default.qworkspace"
     register: qworkspace_file_info
@@ -22,7 +22,7 @@
 #      user: jlw1
 #    when: qk_workspace.changed
   
-  - name: Check if the file exists
+  - name: Check if the sitekey file exists
     win_stat:
       path: "d:\\quintiq\\server.key"
     register: sitekey_file_info
@@ -30,20 +30,40 @@
 
 
   - name: New sitekey
-    win_command: qk new server sitekey {{ q_sitekey }} d:\quintiq\server.key
+    win_command: qk new server sitekey {{ sitekey }} d:\quintiq\server.key
     args:
       chdir: d:\QUINTIQ\bin\
     register: qk_sitekey
     when: sitekey_file_info.stat.exists is not defined or not sitekey_file_info.stat.exists
 
   - name: Set sitekey
-    win_command: qk set server sitekey {{ q_sitekey }}
+    win_command: qk set server sitekey {{ sitekey }}
     args:
       chdir: d:\QUINTIQ\bin\
     when: qk_sitekey.changed
 
   - name: License
-    win_command: qk.exe set server license D:\quintiq_keys\{{ q_sitekey }}_license.txt --addrw --overwritelicense --overwritemappings
+    win_command: qk.exe set server license D:\quintiq_keys\{{ sitekey }}_license.txt --addrw --overwritelicense --overwritemappings
     args:
       chdir: d:\quintiq\bin\
     ignore_errors: yes
+
+  - name: Install/Upgrade model
+    win_command: qk.exe new server "D:\Quicosolution642.qproject"
+    args:
+      chdir: d:\quintiq\bin\
+    register: qk_model
+  
+  - name: New configset [Common,qod,HostName]
+    win_command: qk.exe new server configset [Common,qod,$env:computername] --local
+    args:
+      chdir: d:\quintiq\bin\
+    register: qk_configset_new
+    when: qk_model.changed
+  
+  - name: Set configset [Common,qod,HostName]
+    win_command: qk.exe set server configset [Common,qod,$env:computername]
+    args:
+      chdir: d:\quintiq\bin\
+    register: qk_configset_set
+    when: qk_model.changed
