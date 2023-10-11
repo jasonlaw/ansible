@@ -28,7 +28,6 @@
     register: sitekey_file_info
     ignore_errors: yes
 
-
   - name: New sitekey
     win_command: qk new server sitekey {{ sitekey }} d:\quintiq\server.key
     args:
@@ -36,7 +35,7 @@
     register: qk_sitekey
     when: sitekey_file_info.stat.exists is not defined or not sitekey_file_info.stat.exists
 
-  - name: Set sitekey
+  - name: Set sitekey of {{ sitekey }}
     win_command: qk set server sitekey {{ sitekey }}
     args:
       chdir: d:\QUINTIQ\bin\
@@ -68,14 +67,14 @@
     register: qk_model_active
     when: qk_model.changed
 
-  - name: New configset [Common,qod,HostName]
+  - name: New configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
     win_command: qk new server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}] --local
     args:
       chdir: d:\quintiq\bin\
     register: qk_configset_new
     when: qk_model.changed
   
-  - name: Set configset [Common,qod,HostName]
+  - name: Set configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
     win_command: qk set server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
     args:
       chdir: d:\quintiq\bin\
