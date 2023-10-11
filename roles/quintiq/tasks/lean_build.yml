@@ -8,11 +8,7 @@
       zip_ref: '{{ buildver }}-all'
       zip_name: '{{ buildver }}-all.zip'
       zip_path: 'D:\public\{{ buildver }}-all.zip'
-    temp_path: 'C:\tmp\quintiq{{ buildver }}' 
-  debug:
-    msg:
-      - '{{ quintiq.name}}'
-      - '{{ quintiq.path}}'
+    temp_path: 'C:\tmp\quintiq{{ buildver }}'
 
 - name: Check if {{ quintiq.path }} directory exists
   win_stat:
