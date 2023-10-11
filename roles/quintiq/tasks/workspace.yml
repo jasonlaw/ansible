@@ -1,0 +1,14 @@
+---
+
+- name: Check if the workspace file exists
+  win_stat:
+    path: '{{ quintiq.path }}\default.qworkspace'
+  register: workspace_file_info
+  ignore_errors: true
+
+- name: Create default workspace
+  win_command: qk new workspace default
+  args:
+    chdir: '{{quintiq.bin}}'
+  register: quintiq_workspace
+  when: workspace_file_info.stat.exists is not defined or not workspace_file_info.stat.exists

@@ -1,0 +1,31 @@
+---
+
+- name: Set variables
+  set_fact:
+    license_path: 'L:\{{ sitekey }}\license.txt'
+    server_key_path: '{{ quintiq.path }}\server.key'
+
+- name: Check if the sitekey file exists
+  win_stat:
+    path: '{{ server_key_path }}'
+  register: sitekey_file_info
+  ignore_errors: true
+
+- name: New sitekey of {{ sitekey }}
+  win_command: qk new server sitekey {{ sitekey }} '{{ server_key_path }}'
+  args:
+    chdir: '{{quintiq.bin}}'
+  register: qk_sitekey
+  when: sitekey_file_info.stat.exists is not defined or not sitekey_file_info.stat.exists
+
+- name: Set sitekey of {{ sitekey }}
+  win_command: qk set server sitekey {{ sitekey }}
+  args:
+    chdir: '{{quintiq.bin}}'
+  when: qk_sitekey.changed
+
+- name: License
+  win_command: qk set server license {{ license_path }} --addrw --overwritelicense --overwritemappings
+  args:
+    chdir: '{{quintiq.bin}}'
+  ignore_errors: true

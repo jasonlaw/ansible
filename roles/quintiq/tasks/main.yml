@@ -1,9 +1,4 @@
 ---
 
-- name: Set variables
-  set_fact:
-    quintiq:
-      name: 'quintiq{{ buildver }}'
-      path: 'D:\quintiq{{ buildver }}'
-
 - import_role: lean_build.yml
+- import_role: workspace.yml
