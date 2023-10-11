@@ -5,7 +5,7 @@
 
 - name: 'Unzip file to temporary directory C:\\tmp\\quintiq{{ buildver }}'
   win_unzip:
-    src: Q:\{{ buildver }}-all.zip
+    src: D:\public\{{ buildver }}-all.zip
     dest: C:\tmp\quintiq{{ buildver }}
     creates: C:\tmp\quintiq{{ buildver }}
   when: not directory_check.stat.exists
