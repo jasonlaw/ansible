@@ -1,7 +1,6 @@
 ---
 
-- name: Set destination folder variable
-  set_fact:    
+- set_fact:    
     quintiq_name: 'quintiq{{ buildver }}'
     quintiq_path: 'D:\{{ quintiq_name }}'
     quintiq_src_name: '{{ buildver }}-all'
