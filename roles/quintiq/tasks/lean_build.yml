@@ -1,5 +1,19 @@
 ---
 
+- name: Set variables
+  set_fact:
+    - quintiq:
+        name: 'quintiq{{ buildver }}'
+        path: 'D:\quintiq{{ buildver }}'
+        zip_ref: '{{ buildver }}-all'
+        zip_name: '{{ buildver }}-all.zip'
+        zip_path: 'D:\public\{{ buildver }}-all.zip'
+    - temp_path: 'C:\tmp\quintiq{{ buildver }}' 
+  debug:
+    msg:
+      - '{{ quintiq.name}}'
+      - '{{ quintiq.path}}'
+
 - name: Check if {{ quintiq_path }} directory exists
   win_stat:
     path: '{{ quintiq_path }}'
