@@ -1,0 +1,9 @@
+---
+- hosts: qae
+  tasks:
+    - name: Unzip file
+      win_unzip:
+        src: D:\6420-all.zip
+        dest: D:\quintiq
+        creates: D:\quintiq
+
