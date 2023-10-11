@@ -19,7 +19,7 @@
     path: '{{ quintiq.path }}'
   register: directory_check
 
-- name: Unzip file to temporary directory C:\tmp\{{ quintiq_name }}
+- name: Unzip file to temporary directory C:\tmp\{{ quintiq.name }}
   win_unzip:
     src: '{{ quintiq.zip_path }}'
     dest: '{{ temp_path }}'
