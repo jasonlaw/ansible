@@ -1,0 +1,5 @@
+---
+
+quintiq:
+  name: 'quintiq{{ buildver }}'
+  path: 'D:\quintiq{{ buildver }}'

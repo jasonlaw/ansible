@@ -2,9 +2,12 @@
 
 - name: Set variables
   set_fact:
-    zip_file:
-      name: '{{ buildver }}-all.zip'
-      path: 'D:\public\{{ buildver }}-all.zip'
+    quintiq:
+      name: 'quintiq{{ buildver }}'
+      path: 'D:\quintiq{{ buildver }}'
+      zip_ref: '{{ buildver }}-all'
+      zip_name: '{{ buildver }}-all.zip'
+      zip_path: 'D:\public\{{ buildver }}-all.zip'
     temp_path: 'C:\tmp\quintiq{{ buildver }}'
 
 - name: Check if {{ quintiq.path }} directory exists
@@ -12,16 +15,16 @@
     path: '{{ quintiq.path }}'
   register: directory_check
 
-- name: Unzip file to temporary directory {{ temp_path }}
+- name: Unzip file to temporary directory C:\tmp\{{ quintiq.name }}
   win_unzip:
-    src: '{{ zip_file.path }}'
+    src: '{{ quintiq.zip_path }}'
     dest: '{{ temp_path }}'
     creates: '{{ temp_path }}'
   when: not directory_check.stat.exists
 
 - name: Move contents to destination directory
   win_shell: |
-    Move-Item -Path '{{ temp_path }}\{{ zip_file.name }}' -Destination '{{ quintiq.path }}' -Force
+    Move-Item -Path '{{ temp_path }}\{{ quintiq.zip_ref }}' -Destination '{{ quintiq.path }}' -Force
   when: not directory_check.stat.exists
 
 - name: Remove temporary directory (if it exists)
