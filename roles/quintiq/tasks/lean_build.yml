@@ -14,21 +14,21 @@
       - '{{ quintiq.name}}'
       - '{{ quintiq.path}}'
 
-- name: Check if {{ quintiq_path }} directory exists
+- name: Check if {{ quintiq.path }} directory exists
   win_stat:
-    path: '{{ quintiq_path }}'
+    path: '{{ quintiq.path }}'
   register: directory_check
 
 - name: Unzip file to temporary directory C:\tmp\{{ quintiq_name }}
   win_unzip:
-    src: '{{ quintiq_zip_path }}'
+    src: '{{ quintiq.zip_path }}'
     dest: '{{ temp_path }}'
     creates: '{{ temp_path }}'
   when: not directory_check.stat.exists
 
 - name: Move contents to destination directory
   win_shell: |
-    Move-Item -Path '{{ temp_path }}\{{ quintiq_src_name }}' -Destination '{{ quintiq_path }}' -Force
+    Move-Item -Path '{{ temp_path }}\{{ quintiq.zip_ref }}' -Destination '{{ quintiq.path }}' -Force
   when: not directory_check.stat.exists
 
 - name: Remove temporary directory (if it exists)
