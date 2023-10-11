@@ -9,7 +9,7 @@
     quintiq_zip_path: 'D:\public\{{ quintiq_zip_name }}'
     temp_path: 'C:\tmp\{{ quintiq_name }}'
   debug: 
-    msg: quintiq_name \n quintiq_path \n quintiq_src_name
+    msg: '{{ quintiq_name }}\n{{ quintiq_path }}\n{{ quintiq_src_name }}'
 
 - name: Check if {{ quintiq_path }} directory exists
   win_stat:
