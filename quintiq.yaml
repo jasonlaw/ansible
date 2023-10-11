@@ -73,10 +73,11 @@
       chdir: d:\quintiq\bin\
     register: qk_configset_new
     when: qk_model.changed
+    ignore_errors: yes
   
   - name: Set configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
     win_command: qk set server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
     args:
       chdir: d:\quintiq\bin\
     register: qk_configset_set
-    when: qk_model.changed
+    when: qk_configset_new.changed
