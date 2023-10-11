@@ -1,15 +1,5 @@
 ---
 
-- set_fact:    
-    quintiq_name: 'quintiq{{ buildver }}'
-    quintiq_path: 'D:\{{ quintiq_name }}'
-    quintiq_src_name: '{{ buildver }}-all'
-    quintiq_zip_name: '{{ quintiq_src_name }}.zip'
-    quintiq_zip_path: 'D:\public\{{ quintiq_zip_name }}'
-    temp_path: 'C:\tmp\{{ quintiq_name }}'
-  debug: 
-    msg: '{{ quintiq_name }}\n{{ quintiq_path }}\n{{ quintiq_src_name }}'
-
 - name: Check if {{ quintiq_path }} directory exists
   win_stat:
     path: '{{ quintiq_path }}'

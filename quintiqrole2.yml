@@ -1,0 +1,8 @@
+---
+
+- hosts: qae  
+  vars:
+    buildver: 6420
+  
+  roles:
+    - role: quintiq
