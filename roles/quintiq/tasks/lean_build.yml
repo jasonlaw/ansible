@@ -1,21 +1,32 @@
-- name: Check if D:\quintiq directory exists
+---
+
+- name: Set destination folder variable
+  set_fact:    
+    quintiq_name: quintiq{{ buildver }}
+    quintiq_path: D:\{{ quintiq_name }}
+    quintiq_src_name: "{{ buildver }}-all"
+    quintiq_zip_name: "{{ quintiq_src_name }}.zip"
+    quintiq_zip_path: D:\public\{{ quintiq_zip_name }}
+    temp_path: C:\tmp\{{ quintiq_name }}
+
+- name: Check if {{ quintiq_path }} directory exists
   win_stat:
-    path: D:\quintiq
+    path: {{ quintiq_path }}
   register: directory_check
 
-- name: 'Unzip file to temporary directory C:\\tmp\\quintiq{{ buildver }}'
+- name: Unzip file to temporary directory C:\tmp\{{ quintiq_name }}
   win_unzip:
-    src: D:\public\{{ buildver }}-all.zip
-    dest: C:\tmp\quintiq{{ buildver }}
-    creates: C:\tmp\quintiq{{ buildver }}
+    src: {{ quintiq_zip_path }}
+    dest: {{ temp_path }}
+    creates: {{ temp_path }}
   when: not directory_check.stat.exists
 
 - name: Move contents to destination directory
   win_shell: |
-    Move-Item -Path 'C:\tmp\quintiq{{ buildver }}\{{ buildver }}-all' -Destination 'D:\quintiq' -Force
+    Move-Item -Path '{{ temp_path }}\{{ quintiq_src_name }}' -Destination '{{ quintiq_path }}' -Force
   when: not directory_check.stat.exists
 
 - name: Remove temporary directory (if it exists)
   win_shell: |
-    Remove-Item -Path 'C:\tmp\quintiq{{ buildver }}' -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path '{{ temp_path }}' -Recurse -Force -ErrorAction SilentlyContinue
   when: not directory_check.stat.exists
