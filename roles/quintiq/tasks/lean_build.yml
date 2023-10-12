@@ -4,8 +4,8 @@
   set_fact:
     zip_file:
       name: '{{ buildver }}-all'
-      path: 'D:\public\{{ buildver }}-all.zip'
-    temp_path: 'C:\tmp\quintiq{{ buildver }}'
+      path: '{{ path_env.repository }}\{{ buildver }}-all.zip'
+    temp_path: '{{ path_env.temp }}\quintiq{{ buildver }}'
 
 - name: Check if {{ quintiq.path }} directory exists
   win_stat:

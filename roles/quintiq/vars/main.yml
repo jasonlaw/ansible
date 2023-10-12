@@ -4,6 +4,7 @@ path_env:
   quintiq: 'D:'
   license: 'L:'
   temp: 'C:\tmp'
+  repository: 'D:\public'
 
 quintiq:
   name: 'quintiq{{ buildver }}'
