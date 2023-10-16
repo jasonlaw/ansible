@@ -1,0 +1,12 @@
+---
+
+- hosts: qae
+  name: Quintiq QAE Playbook
+  tags: Install
+  roles:
+    - step1
+    - step2
+  vars:
+    - version: 6420
+    - sitekey: 161462
+    - 

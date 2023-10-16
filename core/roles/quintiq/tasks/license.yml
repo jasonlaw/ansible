@@ -2,7 +2,7 @@
 
 - name: Set variables
   set_fact:
-    license_path: 'L:\{{ sitekey }}\license.txt'
+    license_path: '{{ path_env.license }}\{{ sitekey }}\license.txt'
     server_key_path: '{{ quintiq.path }}\server.key'
 
 - name: Check if the sitekey file exists

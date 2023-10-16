@@ -1,0 +1,12 @@
+---
+
+- hosts: qae  
+  vars:
+    buildver: 6420
+    sitekey: 161462
+  tasks:
+  
+    - name: apply license
+      include_role:
+        name: quintiq
+        tasks_from: license.yml
