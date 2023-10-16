@@ -1,4 +1,6 @@
 windows:
   hosts:
-    qae: 
-      sdcvwdel41:
+    children:
+      qae:
+        hosts: 
+          sdcvwdel41:
