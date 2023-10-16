@@ -1,0 +1,11 @@
+---
+
+- hosts: qae  
+  vars:
+    buildver: 6420
+  tasks:
+  
+    - name: run the lean build only
+      include_role:
+        name: quintiq
+        tasks_from: lean_build.yml
