@@ -1,6 +1,4 @@
 windows:
   hosts:
-    children:
-      qae:
-        hosts: 
-          sdcvwdel41:
+    qae:
+      ansible_host: sdcvwdel41
