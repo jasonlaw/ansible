@@ -1,6 +1,6 @@
 [windows]
-QAE sdcvwdel41
-TCE sdcvwdel40
+QAE ansible_host=sdcvwdel41
+TCE ansible_host=sdcvwdel40
 
 [windows:vars]
 ansible_shell_type=powershell
