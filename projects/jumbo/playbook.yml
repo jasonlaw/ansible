@@ -5,9 +5,11 @@
     - name: create jumbo models if not exists
       win_file: "D:\\jumbo\\models"
       state: directory
+
     - name: create jumbo var if not exists
       win_file: "D:\\jumbo\\var"
       state: directory
+    
     - name: create jumbo etc if not exists
       win_file: "D:\\jumbo\\etc"
       state: directory
