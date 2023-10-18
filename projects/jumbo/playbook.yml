@@ -3,16 +3,19 @@
   
   pre_tasks:
     - name: create jumbo models if not exists
-      win_file: "D:\\jumbo\\models"
-      state: directory
+      win_file: 
+        path: "D:\\jumbo\\models"
+        state: directory
 
     - name: create jumbo var if not exists
-      win_file: "D:\\jumbo\\var"
-      state: directory
+      win_file: 
+        path: "D:\\jumbo\\var"
+        state: directory
     
     - name: create jumbo etc if not exists
-      win_file: "D:\\jumbo\\etc"
-      state: directory
+      win_file:
+        path: "D:\\jumbo\\etc"
+        state: directory
 
   roles:
     - role: install_quintiq_core
