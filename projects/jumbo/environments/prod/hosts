@@ -1,0 +1,6 @@
+[windows]
+QAE sdcvwdel41
+TCE sdcvwdel40
+
+[windows:vars]
+ansible_shell_type=powershell

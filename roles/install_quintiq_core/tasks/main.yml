@@ -1,0 +1,73 @@
+---
+
+- name: Validate required parameter "QUINTIQ_VERSION"
+  fail:
+    msg: QUINTIQ_VERSION is required.
+  when: QUINTIQ_VERSION == ""
+
+- name: Set local variables
+  set_fact:
+    install_dest: "{{ QUINTIQ_INSTALL_PATH }}\\quintiq{{ QUINTIQ_VERSION }}"
+    install_src: "{{ QUINTIQ_INSTALL_SOURCE_PATH }}\\{{ QUINTIQ_VERSION }}-all"    
+    install_bin: "{{ QUINTIQ_INSTALL_PATH }}\\quintiq{{ QUINTIQ_VERSION }}\\bin"
+    temp_path: "C:\\tmp\\quintiq{{ QUINTIQ_VERSION }}"
+
+- name: Debug info
+  debug:
+    msg:
+      - "Quintiq Version = {{ QUINTIQ_VERSION }}"
+      - "Install Source = {{ install_src }}"
+      - "Install Dest = {{ install_dest }}"
+
+- name: Check if {{ install_dest }} directory exists
+  win_stat:
+    path: '{{ install_dest }}'
+  register: directory_check
+
+- name: Unzip source file to temporary directory {{ temp_path }}
+  win_unzip:
+    src: '{{ install_src }}.zip'
+    dest: '{{ temp_path }}'
+    creates: '{{ temp_path }}'
+  when: not directory_check.stat.exists
+
+- name: Move contents to destination directory
+  win_shell: |
+    Move-Item -Path '{{ temp_path }}\{{ QUINTIQ_VERSION }}-all' -Destination '{{ install_dest }}' -Force
+  when: not directory_check.stat.exists
+
+- name: Remove temporary directory (if it exists)
+  win_shell: |
+    Remove-Item -Path '{{ temp_path }}' -Recurse -Force -ErrorAction SilentlyContinue
+  when: not directory_check.stat.exists
+
+- name: Check if the workspace file exists
+  win_stat:
+    path: '{{ install_dest }}\default.qworkspace'
+  register: workspace_file_info
+  ignore_errors: true
+
+- name: Create default workspace
+  win_command: qk new workspace default
+  args:
+    chdir: '{{ install_bin }}'
+  register: quintiq_workspace
+  when: workspace_file_info.stat.exists is not defined or not workspace_file_info.stat.exists
+
+- name: Set models path
+  win_command: qk set workspace models="{{ QUINTIQ_MODELS_PATH }}"
+  args:
+    chdir: '{{ install_bin }}'
+  when: QUINTIQ_MODELS_PATH != ""
+
+- name: Set var path
+  win_command: qk set workspace var="{{ QUINTIQ_VAR_PATH }}"
+  args:
+    chdir: '{{ install_bin }}'
+  when: QUINTIQ_VAR_PATH
+
+- name: Set etc path
+  win_command: qk set workspace etc="{{ QUINTIQ_ETC_PATH }}"
+  args:
+    chdir: '{{ install_bin }}'
+  when: QUINTIQ_ETC_PATH

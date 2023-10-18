@@ -1,0 +1,13 @@
+---
+- hosts: QAE
+  
+  vars:
+    QUINTIQ_VERSION: "6420"
+    QUINTIQ_INSTALL_SOURCE_PATH: "D:\\public"    
+    QUINTIQ_INSTALL_PATH: "D:"
+    QUINTIQ_MODELS_PATH: "D:\\models"
+    QUINTIQ_ETC_PATH: "D:\\etc"
+    QUINTIQ_VAR_PATH: "D:\\var"
+  
+  roles:
+    - install_quintiq_core  
