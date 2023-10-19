@@ -36,8 +36,8 @@
 - name: Unzip source file to temporary directory {{ temp_path }}
   win_unzip:
     src: "{{ install_src }}.zip"
-    dest: "{{ temp_path }}"
-    creates: "{{ temp_path }}"
+    dest: "{{ temp_path }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}"
+    creates: "{{ temp_path }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}"
     rm: true
   when: not directory_check.stat.exists
 
