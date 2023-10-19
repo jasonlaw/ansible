@@ -25,10 +25,8 @@
         state: directory          
 
     - name: Copy {{ quintiq_zip_path }} into tmp folder
-      win_copy:
-        src: "{{ quintiq_zip_path }}"
-        dest: "c:\\tmp\\"
-        remote_src: true
+      win_shell: |
+        Copy-Item "{{ quintiq_zip_path }}" -Destination "C:\\tmp"
 
   roles:
     - role: install_quintiq_core
