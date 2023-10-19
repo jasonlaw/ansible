@@ -13,7 +13,6 @@
 
     - models_path: "D:\\jumbo\\models"
     - var_path: "D:\\jumbo\\var"
-    - etc_path: "D:\\jumbo\\etc"
       
   pre_tasks:
     - name: create "{{ models_path }}" if not exists
@@ -25,12 +24,7 @@
       win_file: 
         path: "{{ var_path }}"
         state: directory
-    
-    - name: create "{{ etc_path }}" if not exists
-      win_file:
-        path: "{{ etc_path }}"
-        state: directory          
-
+      
     - name: Copy "{{ zip_src_path }}" into tmp folder
       win_copy: 
         src: "{{ zip_src_path }}"
@@ -73,7 +67,6 @@
       QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"      
       QUINTIQ_MODELS_PATH: "{{ models_path }}"
       QUINTIQ_VAR_PATH: "{{ var_path }}"
-      QUINTIQ_ETC_PATH: "{{ etc_path }}"
 
     - role: install_quintiq_license
       QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}" #how to avoid redundant?

@@ -6,7 +6,6 @@
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - QUINTIQ_INSTALL_SRC_PATH = {{ QUINTIQ_INSTALL_SRC_PATH }}
       - QUINTIQ_MODELS_PATH = {{ QUINTIQ_MODELS_PATH }}
-      - QUINTIQ_ETC_PATH = {{ QUINTIQ_ETC_PATH }}
       - QUINTIQ_VAR_PATH = {{ QUINTIQ_VAR_PATH }}
 
 - name: Set local variables
@@ -64,9 +63,3 @@
   args:
     chdir: '{{ install_bin }}'
   when: QUINTIQ_VAR_PATH is defined
-
-- name: Set etc path
-  win_command: qk set workspace etc="{{ QUINTIQ_ETC_PATH }}"
-  args:
-    chdir: '{{ install_bin }}'
-  when: QUINTIQ_ETC_PATH is defined
