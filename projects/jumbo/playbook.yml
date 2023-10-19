@@ -2,6 +2,7 @@
 - hosts: QAE
 
   vars:
+  
     - quintiq_version: "6420"
     - sitekey: "162002"
 
@@ -13,8 +14,22 @@
 
     - models_path: "D:\\jumbo\\models"
     - var_path: "D:\\jumbo\\var"
+
+  roles:
+    
+    - role: install_quintiq_core
+      QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
+      QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"      
+      QUINTIQ_MODELS_PATH: "{{ models_path }}"
+      QUINTIQ_VAR_PATH: "{{ var_path }}"
+
+    - role: install_quintiq_license
+      QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}" #how to avoid redundant?
+      QUINTIQ_SITEKEY: "{{ sitekey }}"
+      QUINTIQ_LICENSE_PATH: "{{ license_path }}"
       
   pre_tasks:
+    
     - name: create "{{ models_path }}" if not exists
       win_file: 
         path: "{{ models_path }}"
@@ -48,6 +63,7 @@
         ansible_become_password: =-09op[]":LKM<>?
 
   post_tasks:
+    
     - name: Cleanup temp zip file
       win_file:
         path: "{{ zip_path }}"
@@ -59,16 +75,3 @@
         path: "{{ license_path }}"
         state: absent
       ignore_errors: true
-
-  roles:
-    
-    - role: install_quintiq_core
-      QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
-      QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"      
-      QUINTIQ_MODELS_PATH: "{{ models_path }}"
-      QUINTIQ_VAR_PATH: "{{ var_path }}"
-
-    - role: install_quintiq_license
-      QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}" #how to avoid redundant?
-      QUINTIQ_SITEKEY: "{{ sitekey }}"
-      QUINTIQ_LICENSE_PATH: "{{ license_path }}"
