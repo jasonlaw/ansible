@@ -27,6 +27,7 @@
 - name: Copy {{ install_src }} into {{ install_dest }}
   win_copy:
     src: "{{ install_src }}.zip"
+    dest: "{{ temp_path }}"
   when: not directory_check.stat.exists
 
 - name: Unzip source file to temporary directory {{ temp_path }}
