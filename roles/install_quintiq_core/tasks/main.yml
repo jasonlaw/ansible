@@ -7,9 +7,9 @@
 
 - name: Set local variables
   set_fact:
-    install_dest: "{{ QUINTIQ_INSTALL_PATH }}\\quintiq{{ QUINTIQ_VERSION }}"
     install_src: "{{ QUINTIQ_INSTALL_SOURCE_PATH }}\\{{ QUINTIQ_VERSION }}-all"    
-    install_bin: "{{ QUINTIQ_INSTALL_PATH }}\\quintiq{{ QUINTIQ_VERSION }}\\bin"
+    install_dest: "{{ QUINTIQ_INSTALL_PATH }}"    
+    install_bin: "{{ QUINTIQ_INSTALL_PATH }}\\bin"
     temp_path: "C:\\tmp\\quintiq{{ QUINTIQ_VERSION }}"
 
 - name: Debug info

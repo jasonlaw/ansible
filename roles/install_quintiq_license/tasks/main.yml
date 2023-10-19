@@ -1,0 +1,49 @@
+---
+
+- name: Validate required parameter "QUINTIQ_SITE_KEY"
+  fail:
+    msg: QUINTIQ_SITE_KEY is required.
+  when: QUINTIQ_SITE_KEY == ""
+
+- name: Validate required parameter "QUINTIQ_INSTALL_PATH"
+  fail:
+    msg: QUINTIQ_INSTALL_PATH is required.
+  when: QUINTIQ_INSTALL_PATH == ""
+
+- name: Set local variables
+  set_fact:
+    install_path: "{{ QUINTIQ_INSTALL_PATH }}"
+    install_bin: "{{ QUINTIQ_INSTALL_PATH }}\\bin"
+    sitekey_path: "{{ QUINTIQ_INSTALL_PATH }}\\sitekey.key"
+    license_path: "{{ QUINTIQ_LICENSE_PATH }}\\{{ ansible_env.COMPUTERNAME }}\\{{ QUINTIQ_SITE_KEY }}\\license.txt"
+
+- name: Debug info
+  debug:
+    msg:
+      - "Install Dest = {{ install_dest }}"
+      - "Site Key Path = {{ sitekey_path }}"
+
+- name: Check if the sitekey file exists
+  win_stat:
+    path: "{{ sitekey_path }}"
+  register: sitekey_file_info
+  ignore_errors: true
+
+- name: New sitekey
+  win_command: qk new server sitekey {{ sitekey }} {{ sitekey_path }}
+  args:
+    chdir: "{{ install_bin }}"
+  register: qk_sitekey
+  when: sitekey_file_info.stat.exists is not defined or not sitekey_file_info.stat.exists
+
+- name: Set sitekey of {{ sitekey }}
+  win_command: qk set server sitekey {{ sitekey }}
+  args:
+    chdir: "{{ install_bin }}"
+  when: qk_sitekey.changed
+
+- name: License
+  win_command: qk set server license {{ license_path }} --addrw --overwritelicense --overwritemappings
+  args:
+    chdir: "{{ install_bin }}"
+  ignore_errors: true
