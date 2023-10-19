@@ -25,8 +25,14 @@
         state: directory          
 
     - name: Copy {{ quintiq_zip_path }} into tmp folder
-      win_shell: |
-        Copy-Item "{{ quintiq_zip_path }}" -Destination "C:\\tmp"
+      win_copy: 
+        src: "{{ quintiq_zip_path }}"
+        dest: "C:\\tmp"
+      become: true
+      become_method: runas
+      become_user: dsone\jlw1
+      vars:
+        ansible_become_password: "=-09op[]\";lkm,./"
 
   roles:
     - role: install_quintiq_core
