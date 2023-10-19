@@ -33,7 +33,7 @@
     path: "{{ install_dest }}"
   register: directory_check
 
-- name: Unzip source file to temporary directory {{ temp_path }}
+- name: Unzip source file to {{ temp_path }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}
   win_unzip:
     src: "{{ install_src }}.zip"
     dest: "{{ temp_path }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}"
@@ -41,7 +41,7 @@
     rm: true
   when: not directory_check.stat.exists
 
-- name: Move contents to destination directory
+- name: Move extracted source to destination {{ install_dest }}
   win_shell: |
     Move-Item -Path "{{ temp_path }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}" -Destination "{{ install_dest }}" -Force
   when: not directory_check.stat.exists

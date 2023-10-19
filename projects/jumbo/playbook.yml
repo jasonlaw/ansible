@@ -7,6 +7,7 @@
     - quintiq_var_path: "D:\\jumbo\\var"
     - quintiq_etc_path: "D:\\jumbo\\etc"
     - quintiq_zip_path: \\sdcvwdel40\QuintiqReleases\6420-all.zip
+    - QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"
   
   pre_tasks:
     - name: create {{ quintiq_models_path }} if not exists
@@ -37,7 +38,7 @@
 
   roles:
     - role: install_quintiq_core
-      QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"
+      # QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"
       QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
       QUINTIQ_MODELS_PATH: "{{ quintiq_models_path }}"
       QUINTIQ_VAR_PATH: "{{ quintiq_var_path }}"
