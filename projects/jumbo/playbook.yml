@@ -71,7 +71,7 @@
     - role: install_quintiq_core
       QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
       QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"      
-      QUINTIQ_MODELS_PATH: "{{ model_path }}"
+      QUINTIQ_MODELS_PATH: "{{ models_path }}"
       QUINTIQ_VAR_PATH: "{{ var_path }}"
       QUINTIQ_ETC_PATH: "{{ etc_path }}"
 
