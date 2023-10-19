@@ -1,0 +1,5 @@
+---
+- name: Debug info
+  debug:
+    msg:
+      - ROLE1_VAR1 = {{ ROLE1_VAR1 }}
