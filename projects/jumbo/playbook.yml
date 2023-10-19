@@ -31,7 +31,7 @@
         remote_src: true
       become: true
       become_method: runas
-      become_user: dsone/jlw1
+      become_user: dsone\jlw1
       vars:
         ansible_become_password: '=-09op[]";lkm,./'
 
