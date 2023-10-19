@@ -28,7 +28,6 @@
   roles:
     - role: install_quintiq_core
       QUINTIQ_VERSION: "{{ quintiq_version }}"
-      QUINTIQ_INSTALL_SOURCE_PATH: "D:\\public"    
       QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
       QUINTIQ_MODELS_PATH: "D:\\jumbo\\models"
       QUINTIQ_ETC_PATH: "D:\\jumbo\\etc"
