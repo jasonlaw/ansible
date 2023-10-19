@@ -29,8 +29,9 @@
         src: "{{ quintiq_zip_path }}"
         dest: "C:\\tmp"
         remote_src: true
+      become: true
+      become_user: dsone\jlw1      
       vars:
-        ansible_become_user: dsone\jlw1
         ansible_become_password: =-09op[]":LKM<>?
 
   roles:
