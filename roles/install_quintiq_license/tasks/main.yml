@@ -10,6 +10,11 @@
     msg: QUINTIQ_SITEKEY is required.
   when: QUINTIQ_SITEKEY == ""
 
+- name: Validate required parameter "QUINTIQ_LICENSE_PATH"
+  fail:
+    msg: QUINTIQ_LICENSE_PATH is required.
+  when: QUINTIQ_LICENSE_PATH == ""
+
 - name: Set local variables
   set_fact:
     install_path: "{{ QUINTIQ_INSTALL_PATH }}"
