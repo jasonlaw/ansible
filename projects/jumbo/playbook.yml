@@ -3,26 +3,27 @@
 
   vars:
     - quintiq_version: "6420"
-    - quintiq_models_path: "D:\\jumbo\\models"
-    - quintiq_var_path: "D:\\jumbo\\var"
-    - quintiq_etc_path: "D:\\jumbo\\etc"
     - quintiq_zip_path: \\sdcvwdel40\QuintiqReleases\6420-all.zip
-    - QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"
+
+    - QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"    
+    - QUINTIQ_MODELS_PATH: "D:\\jumbo\\models"
+    - QUINTIQ_VAR_PATH: "D:\\jumbo\\var"
+    - QUINTIQ_ETC_PATH: "D:\\jumbo\\etc"
   
   pre_tasks:
-    - name: create {{ quintiq_models_path }} if not exists
+    - name: create {{ QUINTIQ_MODELS_PATH }} if not exists
       win_file: 
-        path: "{{ quintiq_models_path }}"
+        path: "{{ QUINTIQ_MODELS_PATH }}"
         state: directory
 
-    - name: create {{ quintiq_var_path }} if not exists
+    - name: create {{ QUINTIQ_VAR_PATH }} if not exists
       win_file: 
-        path: "{{ quintiq_var_path }}"
+        path: "{{ QUINTIQ_VAR_PATH }}"
         state: directory
     
-    - name: create {{ quintiq_etc_path }} if not exists
+    - name: create {{ QUINTIQ_ETC_PATH }} if not exists
       win_file:
-        path: "{{ quintiq_etc_path }}"
+        path: "{{ QUINTIQ_ETC_PATH }}"
         state: directory          
 
     - name: Copy {{ quintiq_zip_path }} into tmp folder
@@ -38,8 +39,5 @@
 
   roles:
     - role: install_quintiq_core
-      # QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"
-      QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
-      QUINTIQ_MODELS_PATH: "{{ quintiq_models_path }}"
-      QUINTIQ_VAR_PATH: "{{ quintiq_var_path }}"
-      QUINTIQ_ETC_PATH: "{{ quintiq_etc_path }}"
+      QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"
+    
