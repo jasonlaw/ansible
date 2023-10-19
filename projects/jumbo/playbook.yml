@@ -8,8 +8,8 @@
     - zip_src_path: \\sdcvwdel40\QuintiqReleases\6420-all.zip
     - zip_path: "c:\\tmp\\6420-all.zip"
 
-    - license_src_path: \\sdcvwdel40\QuintiqLicenses\{{ ansible_env.COMPUTERNAME }}\{{ quintiq_sitekey }}\license.txt
-    - license_path: "c:\\tmp\\license_{{ quintiq_sitekey }}.txt"
+    - license_src_path: \\sdcvwdel40\QuintiqLicenses\{{ ansible_env.COMPUTERNAME }}\{{ sitekey }}\license.txt
+    - license_path: "c:\\tmp\\license_{{ sitekey }}.txt"
 
     - models_path: "D:\\jumbo\\models"
     - var_path: "D:\\jumbo\\var"
