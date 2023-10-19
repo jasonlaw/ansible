@@ -4,6 +4,13 @@
   vars:
     ROLE1_VAR1: "Playbook->vars"
 
+  pre_tasks:
+
+    - name: Debug info
+      debug:
+        msg:
+          - env = {{ env }}
+
   roles:
     
     - role: role1
