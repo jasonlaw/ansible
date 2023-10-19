@@ -4,8 +4,8 @@
   vars:
     - quintiq_version: "6420"
     - quintiq_models_path: "D:\\jumbo\\models"
-    - quintiq_var_path: "D:\\jumbo\\models"
-    - quintiq_etc_path: "D:\\jumbo\\models"
+    - quintiq_var_path: "D:\\jumbo\\var"
+    - quintiq_etc_path: "D:\\jumbo\\etc"
     - quintiq_zip_path: \\sdcvwdel40\QuintiqReleases\6420-all.zip
   
   pre_tasks:
@@ -29,16 +29,14 @@
         src: "{{ quintiq_zip_path }}"
         dest: "C:\\tmp"
         remote_src: true
-      become: true
-      become_method: runas
-      become_user: dsone\jlw1
       vars:
+        ansible_become_user: dsone\jlw1
         ansible_become_password: =-09op[]":LKM<>?
 
   roles:
     - role: install_quintiq_core
-      QUINTIQ_VERSION: "{{ quintiq_version }}"
+      QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"
       QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
-      QUINTIQ_MODELS_PATH: "D:\\jumbo\\models"
-      QUINTIQ_ETC_PATH: "D:\\jumbo\\etc"
-      QUINTIQ_VAR_PATH: "D:\\jumbo\\var"
+      QUINTIQ_MODELS_PATH: "{{ quintiq_models_path }}"
+      QUINTIQ_VAR_PATH: "{{ quintiq_var_path }}"
+      QUINTIQ_ETC_PATH: "{{ quintiq_etc_path }}"

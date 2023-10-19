@@ -1,14 +1,14 @@
 ---
 
-- name: Validate required parameter "QUINTIQ_SITE_KEY"
-  fail:
-    msg: QUINTIQ_SITE_KEY is required.
-  when: QUINTIQ_SITE_KEY == ""
-
 - name: Validate required parameter "QUINTIQ_INSTALL_PATH"
   fail:
     msg: QUINTIQ_INSTALL_PATH is required.
   when: QUINTIQ_INSTALL_PATH == ""
+
+- name: Validate required parameter "QUINTIQ_SITE_KEY"
+  fail:
+    msg: QUINTIQ_SITE_KEY is required.
+  when: QUINTIQ_SITE_KEY == ""
 
 - name: Set local variables
   set_fact:

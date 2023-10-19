@@ -1,21 +1,30 @@
 ---
 
-- name: Validate required parameter "QUINTIQ_VERSION"
+- name: Validate required parameter "QUINTIQ_INSTALL_PATH"
   fail:
-    msg: QUINTIQ_VERSION is required.
-  when: QUINTIQ_VERSION == ""
+    msg: QUINTIQ_INSTALL_PATH is required.
+  when: QUINTIQ_INSTALL_PATH == ""
+
+- name: Validate required parameter "QUINTIQ_INSTALL_SRC_PATH"
+  fail:
+    msg: QUINTIQ_INSTALL_SRC_PATH is required.
+  when: QUINTIQ_INSTALL_SRC_PATH == ""
+
+- name: Validate required parameter "QUINTIQ_INSTALL_SRC_NAME"
+  fail:
+    msg: QUINTIQ_INSTALL_SRC_NAME is required.
+  when: QUINTIQ_INSTALL_SRC_NAME == ""
 
 - name: Set local variables
   set_fact:
-    install_src: "{{ QUINTIQ_INSTALL_SOURCE_PATH }}\\{{ QUINTIQ_VERSION }}-all"    
+    install_src: "{{ QUINTIQ_INSTALL_SRC_PATH }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}-all"    
     install_dest: "{{ QUINTIQ_INSTALL_PATH }}"    
     install_bin: "{{ QUINTIQ_INSTALL_PATH }}\\bin"
-    temp_path: "C:\\tmp\\quintiq{{ QUINTIQ_VERSION }}"
+    temp_path: "C:\\tmp"
 
 - name: Debug info
   debug:
     msg:
-      - "Quintiq Version = {{ QUINTIQ_VERSION }}"
       - "Install Source = {{ install_src }}"
       - "Install Dest = {{ install_dest }}"
 
@@ -34,7 +43,7 @@
 
 - name: Move contents to destination directory
   win_shell: |
-    Move-Item -Path "{{ temp_path }}\\{{ QUINTIQ_VERSION }}-all" -Destination "{{ install_dest }}" -Force
+    Move-Item -Path "{{ temp_path }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}\\{{ QUINTIQ_INSTALL_SRC_NAME }}" -Destination "{{ install_dest }}" -Force
   when: not directory_check.stat.exists
 
 - name: Check if the workspace file exists
