@@ -1,5 +1,5 @@
 ---
 
-QUINTIQ_SITE_KEY: "" #required field
+QUINTIQ_SITEKEY: "" #required field
 QUINTIQ_LICENSE_PATH: "L:"
 QUINTIQ_INSTALL_PATH: "D:"
