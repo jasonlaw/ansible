@@ -18,15 +18,17 @@
   roles:
     
     - role: install_quintiq_core
-      QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
-      QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"      
-      QUINTIQ_MODELS_PATH: "{{ models_path }}"
-      QUINTIQ_VAR_PATH: "{{ var_path }}"
+      vars:
+        QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
+        QUINTIQ_INSTALL_SRC_NAME: "{{ quintiq_version }}-all"      
+        QUINTIQ_MODELS_PATH: "{{ models_path }}"
+        QUINTIQ_VAR_PATH: "{{ var_path }}"
 
     - role: install_quintiq_license
-      # QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}" #how to avoid redundant?
-      QUINTIQ_SITEKEY: "{{ sitekey }}"
-      QUINTIQ_LICENSE_PATH: "{{ license_path }}"
+      vars:
+        # QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}" #how to avoid redundant?
+        QUINTIQ_SITEKEY: "{{ sitekey }}"
+        QUINTIQ_LICENSE_PATH: "{{ license_path }}"
       
   pre_tasks:
     
