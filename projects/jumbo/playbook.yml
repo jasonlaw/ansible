@@ -28,7 +28,7 @@
       win_copy: 
         src: "{{ quintiq_zip_path }}"
         dest: "C:\\tmp"
-      become: true
+      become: yes
       become_method: runas
       become_user: dsone\jlw1
       vars:
