@@ -6,8 +6,7 @@
     - quintiq_models_path: "D:\\jumbo\\models"
     - quintiq_var_path: "D:\\jumbo\\models"
     - quintiq_etc_path: "D:\\jumbo\\models"
-    - quintiq_src_path: \\sdcvwdel40\QuintiqReleases
-    - quintiq_src_path: \\sdcvwdel40\QuintiqReleases
+    - quintiq_zip_path: \\sdcvwdel40\QuintiqReleases\6420-all.zip
   
   pre_tasks:
     - name: create {{ quintiq_models_path }} if not exists
@@ -24,6 +23,12 @@
       win_file:
         path: "{{ quintiq_etc_path }}"
         state: directory          
+
+    - name: Copy {{ quintiq_zip_path }} into tmp folder
+      win_copy:
+        src: "{{ quintiq_zip_path }}"
+        dest: "c:\\tmp\\"
+        remote_src: true
 
   roles:
     - role: install_quintiq_core
