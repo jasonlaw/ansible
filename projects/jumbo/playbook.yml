@@ -1,27 +1,35 @@
 ---
 - hosts: QAE
+
+  vars:
+    - quintiq_version: "6420"
+    - quintiq_models_path: "D:\\jumbo\\models"
+    - quintiq_var_path: "D:\\jumbo\\models"
+    - quintiq_etc_path: "D:\\jumbo\\models"
+    - quintiq_src_path: \\sdcvwdel40\QuintiqReleases
+    - quintiq_src_path: \\sdcvwdel40\QuintiqReleases
   
   pre_tasks:
-    - name: create jumbo models if not exists
+    - name: create {{ quintiq_models_path }} if not exists
       win_file: 
-        path: "D:\\jumbo\\models"
+        path: "{{ quintiq_models_path }}"
         state: directory
 
-    - name: create jumbo var if not exists
+    - name: create {{ quintiq_var_path }} if not exists
       win_file: 
-        path: "D:\\jumbo\\var"
+        path: "{{ quintiq_var_path }}"
         state: directory
     
-    - name: create jumbo etc if not exists
+    - name: create {{ quintiq_etc_path }} if not exists
       win_file:
-        path: "D:\\jumbo\\etc"
-        state: directory
+        path: "{{ quintiq_etc_path }}"
+        state: directory          
 
   roles:
     - role: install_quintiq_core
-      QUINTIQ_VERSION: "6420"
+      QUINTIQ_VERSION: "{{ quintiq_version }}"
       QUINTIQ_INSTALL_SOURCE_PATH: "D:\\public"    
-      QUINTIQ_INSTALL_PATH: "D:\\quintiq6420"
+      QUINTIQ_INSTALL_PATH: "D:\\quintiq{{ quintiq_version }}"
       QUINTIQ_MODELS_PATH: "D:\\jumbo\\models"
       QUINTIQ_ETC_PATH: "D:\\jumbo\\etc"
       QUINTIQ_VAR_PATH: "D:\\jumbo\\var"

@@ -21,36 +21,37 @@
 
 - name: Check if {{ install_dest }} directory exists
   win_stat:
-    path: '{{ install_dest }}'
+    path: "{{ install_dest }}"
   register: directory_check
+
+- name: Copy {{ install_src }} into {{ install_dest }}
+  win_copy:
+    src: "{{ install_src }}.zip"
+  when: not directory_check.stat.exists
 
 - name: Unzip source file to temporary directory {{ temp_path }}
   win_unzip:
-    src: '{{ install_src }}.zip'
-    dest: '{{ temp_path }}'
-    creates: '{{ temp_path }}'
+    src: "{{ install_src }}.zip"
+    dest: "{{ temp_path }}"
+    creates: "{{ temp_path }}"
+    rm: true
   when: not directory_check.stat.exists
 
 - name: Move contents to destination directory
   win_shell: |
-    Move-Item -Path '{{ temp_path }}\{{ QUINTIQ_VERSION }}-all' -Destination '{{ install_dest }}' -Force
-  when: not directory_check.stat.exists
-
-- name: Remove temporary directory (if it exists)
-  win_shell: |
-    Remove-Item -Path '{{ temp_path }}' -Recurse -Force -ErrorAction SilentlyContinue
+    Move-Item -Path "{{ temp_path }}\\{{ QUINTIQ_VERSION }}-all" -Destination "{{ install_dest }}" -Force
   when: not directory_check.stat.exists
 
 - name: Check if the workspace file exists
   win_stat:
-    path: '{{ install_dest }}\default.qworkspace'
+    path: "{{ install_dest }}\\default.qworkspace"
   register: workspace_file_info
   ignore_errors: true
 
 - name: Create default workspace
   win_command: qk new workspace default
   args:
-    chdir: '{{ install_bin }}'
+    chdir: "{{ install_bin }}"
   register: quintiq_workspace
   when: workspace_file_info.stat.exists is not defined or not workspace_file_info.stat.exists
 
