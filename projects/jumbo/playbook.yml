@@ -20,8 +20,7 @@
   roles:
     - role: install_quintiq_core
       QUINTIQ_VERSION: "6420"
-      QUINTIQ_INSTALL_SOURCE_PATH: "D:\\public"    
-      QUINTIQ_INSTALL_PATH: "D:"
+      QUINTIQ_INSTALL_PATH: "D:\\quintiq6420"
       QUINTIQ_MODELS_PATH: "D:\\jumbo\\models"
       QUINTIQ_ETC_PATH: "D:\\jumbo\\etc"
       QUINTIQ_VAR_PATH: "D:\\jumbo\\var"
