@@ -12,27 +12,20 @@
     install_path: "{{ QUINTIQ_INSTALL_PATH }}"
     install_bin: "{{ QUINTIQ_INSTALL_PATH }}\\bin"
     sitekey: "{{ QUINTIQ_SITEKEY }}"
-    sitekey_path: "{{ QUINTIQ_INSTALL_PATH }}\\sitekey.key"
+    serverkey_path: "{{ QUINTIQ_INSTALL_PATH }}\\server.key"
     license_path: "{{ QUINTIQ_LICENSE_PATH }}"
 
-- name: Check if the sitekey file exists
-  win_stat:
-    path: "{{ sitekey_path }}"
-  register: sitekey_file_info
-  ignore_errors: true
-
 - name: New sitekey
-  win_command: qk new server sitekey {{ sitekey }} {{ sitekey_path }}
+  win_command: qk new server sitekey {{ sitekey }} {{ serverkey_path }}
   args:
     chdir: "{{ install_bin }}"
-  register: qk_sitekey
-  when: sitekey_file_info.stat.exists is not defined or not sitekey_file_info.stat.exists
+  ignore_errors: true
 
 - name: Set sitekey of {{ sitekey }}
   win_command: qk set server sitekey {{ sitekey }}
   args:
     chdir: "{{ install_bin }}"
-  when: qk_sitekey.changed
+  ignore_errors: true
 
 - name: License
   win_command: qk set server license {{ license_path }} --addrw --overwritelicense --overwritemappings
