@@ -1,6 +1,8 @@
-env=test
-ansible_shell_type=powershell
-
+[windows]
 QAE ansible_host=sdcvwdel41
 TCE ansible_host=sdcvwdel41
+
+[windows:vars]
+env=test
+ansible_shell_type=powershell
 

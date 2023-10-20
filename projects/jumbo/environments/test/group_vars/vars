@@ -1,2 +1,0 @@
-env=test
-ansible_shell_type=powershell
