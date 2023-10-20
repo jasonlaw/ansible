@@ -51,7 +51,7 @@
       become_method: runas
       become_user: dsone\jlw1      
       vars:
-        ansible_become_password: {{ vault_ansible_user_password }}
+        ansible_become_password: "{{ vault_ansible_user_password }}"
 
     - name: Copy "{{ license_path }}" into tmp folder
       win_copy: 
@@ -62,7 +62,7 @@
       become_method: runas
       become_user: dsone\jlw1      
       vars:
-        ansible_become_password: {{ vault_ansible_user_password }}
+        ansible_become_password: "{{ vault_ansible_user_password }}"
 
   post_tasks:
     
