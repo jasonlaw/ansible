@@ -10,6 +10,7 @@
       debug:
         msg:
           - env = {{ env }}
+          - pass = {{ vault_ansible_user_password }}
 
   roles:
     
