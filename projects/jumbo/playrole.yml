@@ -19,4 +19,10 @@
       #   ROLE1_VAR1: "Playbook->role1->vars"
         
     - role: role2
-      
+
+- hosts: TCE
+
+  tasks:
+    
+    - name: Ping Pong
+      win_ping:
