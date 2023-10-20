@@ -1,2 +1,6 @@
-QAE ansible_host=sdcvwdel41
-TCE ansible_host=sdcvwdel41
+windows:
+  hosts:    
+    QAE:
+      ansible_host: sdcvwdel41
+    TCE:
+      ansible_host: sdcvwdel41
