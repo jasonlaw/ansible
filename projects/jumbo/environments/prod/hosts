@@ -5,3 +5,4 @@ TCE ansible_host=sdcvwdel40
 [windows:vars]
 env=prod
 ansible_shell_type=powershell
+vault_password_file=vault_pass.txt
