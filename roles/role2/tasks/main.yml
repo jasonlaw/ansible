@@ -4,3 +4,4 @@
     msg:
       - ROLE1_VAR1 = {{ ROLE1_VAR1 }}
       - ROLE1_VAR2 = {{ ROLE1_VAR2 }}
+      - ROLE1_VAR3 = {{ ROLE1_VAR3 }}

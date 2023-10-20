@@ -17,6 +17,7 @@
     - role: role1
       vars:
         ROLE1_VAR2: "Playbook->role1->vars"
+        ROLE1_VAR3: "Playbook->role1->vars"
         
     - role: role2
 
