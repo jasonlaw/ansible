@@ -14,7 +14,7 @@
     serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\site_{{ QUINTIQ_LICENSE.SITEKEY }}.key'
     license_path: '{{ QUINTIQ_LICENSE.FILE_PATH }}'
 
-- name: Check sitekey
+- name: Check sitekey {{ serverkey_path }}
   win_command: qk get server sitekey
   args:
     chdir: '{{ install_bin }}'
