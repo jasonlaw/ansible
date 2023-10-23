@@ -21,6 +21,9 @@
   register: qk_sitekey
   ignore_errors: true 
 
+- debug:
+    var: qk_sitekey
+
 - set_fact:
     sitekey_empty: "{{ (qk_sitekey.stdout is defined and qk_sitekey.stdout.startswith('[ERROR]')) | default(true) }}"
    
