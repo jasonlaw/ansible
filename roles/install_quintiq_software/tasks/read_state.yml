@@ -1,10 +1,16 @@
 ---
+- name: Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      
 - set_fact:
     quintiq_state: null
 
 - name: Read Quintiq state into quintiq_state variable
   include_vars:
-    file: 'C:\Quintiq\state.yml'
+    file: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
     name: quintiq_state
 
 - name: Display the variable
