@@ -10,7 +10,12 @@
 
 - name: Read Quintiq state into quintiq_state variable
   win_shell: get-content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
-  register: quintiq_state 
+  register: temp_quintiq_state 
+
+- name: Convert the YAML content to an Ansible variable
+  set_fact:
+    quintiq_state: '{{ temp_quintiq_state.stdout | from_yaml }}'
+  when: temp_quintiq_state.stdout is defined
 
 - name: Display the variable
   debug:
