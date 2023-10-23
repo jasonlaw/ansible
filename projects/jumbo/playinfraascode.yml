@@ -51,7 +51,7 @@
       vars:
         ansible_become_password: =-09op[]":LKM<>?
       when: >
-        quintiq_state is defined and
+        quintiq_state|length>0 and
         quintiq_state.version != quintiq_version
 
     - name: Check Quintiq Server Key
