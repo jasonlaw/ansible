@@ -12,6 +12,7 @@
   include_vars:
     file: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
     name: quintiq_state
+    remote_src: true
 
 - name: Display the variable
   debug:
