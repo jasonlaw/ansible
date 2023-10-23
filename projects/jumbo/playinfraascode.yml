@@ -15,7 +15,7 @@
 
   roles:
     
-    - role: install_quintiq_quintiq
+    - role: install_quintiq_software
       vars:
         QUINTIQ_VERSION: '{{ quintiq_version }}'
         QUINTIQ_INSTALL_PATH: 'D:\'
