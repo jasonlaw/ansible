@@ -6,7 +6,7 @@
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       
 - set_fact:
-    quintiq_state: null
+    quintiq_state: ''
 
 - name: Read Quintiq state into quintiq_state variable
   win_shell: get-content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
