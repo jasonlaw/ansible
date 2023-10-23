@@ -9,10 +9,8 @@
     quintiq_state: null
 
 - name: Read Quintiq state into quintiq_state variable
-  include_vars:
-    file: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
-    name: quintiq_state
-    remote_src: true
+  win_shell: get-content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
+  register: quintiq_state 
 
 - name: Display the variable
   debug:
