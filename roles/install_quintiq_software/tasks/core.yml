@@ -12,10 +12,19 @@
 - name: Set local variables
   set_fact:
     install_src: '{{ QUINTIQ_INSTALL_SRC_PATH }}\{{ QUINTIQ_INSTALL_SRC_NAME }}'
-    install_dest: '{{ QUINTIQ_INSTALL_PATH }}'    
+    install_dest: '{{ QUINTIQ_INSTALL_PATH }}\quintiq{{ QUINTIQ_VERSION }}'    
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\bin'
     temp_path: 'C:\tmp'
+    
+- name: Local variables
+  debug:
+    msg:
+        - "install_src: {{ install_src }}"
+        - "install_dest: {{ install_dest }}"
+        - "install_bin: {{ install_bin }}"
+        - "temp_path: {{ temp_path }}"
 
+        
 - name: Check if {{ install_dest }} directory exists
   win_stat:
     path: '{{ install_dest }}'
