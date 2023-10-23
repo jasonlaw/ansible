@@ -2,13 +2,9 @@
 - name: Parameters info
   debug:
     msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
       - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
-
-- name: Create Quintiq State folder
-  win_file: 
-    path: 'C:\Quintiq'
-    state: directory
 
 - name: Write Quintiq state to a file
   win_copy:
@@ -16,4 +12,4 @@
       quintiq:
         version: '{{ QUINTIQ_VERSION  }}'
         path: '{{ QUINTIQ_INSTALL_PATH }}\quintiq{{ QUINTIQ_VERSION  }}'
-    dest: 'C:\Quintiq\state.yml'
+    dest: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT  }}\quintiq.yml'
