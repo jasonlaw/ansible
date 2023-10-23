@@ -47,8 +47,8 @@
       vars:
         ansible_become_password: =-09op[]":LKM<>?
       when: >
-        quintiq_state.rc == 0 and
-        quintiq_info.version != quintiq_version
+        quintiq_state_ok  and
+        quintiq_state.version != quintiq_version
 
     - name: Copy "{{ license_path }}" into tmp folder
       win_copy: 
