@@ -6,7 +6,7 @@
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - QUINTIQ_INSTALL_SRC_PATH = {{ QUINTIQ_INSTALL_SRC_PATH }}
       - QUINTIQ_INSTALL_SRC_NAME = {{ QUINTIQ_INSTALL_SRC_NAME }}
-      - QUINTIQ_WORSKPACE = {{ QUINTIQ_WORSKPACE | default('undefined') }}
+      - QUINTIQ_WORKSPACE = {{ QUINTIQ_WORKSPACE | default('undefined') }}
       - QUINTIQ_LICENSE = {{ QUINTIQ_LICENSE | default('undefined') }}
 
 - name: Set local variables
@@ -73,36 +73,5 @@
     workspace_file_info.stat.exists is not defined or
     not workspace_file_info.stat.exists
 
-- name: Set models path
-  win_command: qk set workspace models="{{ QUINTIQ_WORKSPACE.MODELS_PATH }}"
-  args:
-    chdir: '{{ install_bin }}'
-  when: >
-    QUINTIQ_WORKSPACE is defined and
-    QUINTIQ_WORKSPACE.MODELS_PATH is defined
-
-- name: Set var path
-  win_command: qk set workspace var="{{ QUINTIQ_WORKSPACE.VAR_PATH }}"
-  args:
-    chdir: '{{ install_bin }}'
-  when: >
-    QUINTIQ_WORKSPACE is defined and
-    QUINTIQ_WORKSPACE.VAR_PATH is defined
-
-- name: Create models path
-  win_file:
-    path: '{{ QUINTIQ_WORKSPACE.MODELS_PATH }}'
-    state: directory
-  when: >
-    QUINTIQ_WORKSPACE is defined and
-    QUINTIQ_WORKSPACE.MODELS_PATH is defined and
-    QUINTIQ_WORKSPACE.MODELS_PATH_CREATE|bool
-
-- name: Create var path
-  win_file:
-    path: '{{ QUINTIQ_WORKSPACE.VAR_PATH }}'
-    state: directory
-  when: >
-    QUINTIQ_WORKSPACE is defined and
-    QUINTIQ_WORKSPACE.VAR_PATH is defined and
-    QUINTIQ_WORKSPACE.VAR_PATH_CREATE|bool
+- name: Update Quintiq state
+  include_tasks: write_state.yml

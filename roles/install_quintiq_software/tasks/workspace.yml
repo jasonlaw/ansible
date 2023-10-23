@@ -4,7 +4,7 @@
     msg:
       - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
-      - QUINTIQ_WORSKPACE = {{ QUINTIQ_WORSKPACE | default('undefined') }}
+      - QUINTIQ_WORKSPACE = {{ QUINTIQ_WORKSPACE | default('undefined') }}
 
 - name: Set local variables
   set_fact:

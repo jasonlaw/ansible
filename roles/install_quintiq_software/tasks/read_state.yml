@@ -1,0 +1,12 @@
+---
+- set_fact:
+    quintiq_state: null
+
+- name: Read Quintiq state into quintiq_state variable
+  include_vars:
+    file: 'C:\Quintiq\state.yml'
+    name: quintiq_state
+
+- name: Display the variable
+  debug:
+    var: quintiq_state
