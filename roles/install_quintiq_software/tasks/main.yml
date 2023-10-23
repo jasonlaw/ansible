@@ -1,2 +1,5 @@
 ---
-- import_role: core.yml
+
+- name: Install core software
+  include_role: core.yml
+  
