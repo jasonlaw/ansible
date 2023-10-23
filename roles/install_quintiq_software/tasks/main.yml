@@ -2,7 +2,11 @@
 
 - name: core.yml
   include_tasks: core.yml
-  
+
+- name: Debug QUINTIQ_WORKSPACE
+  debug:
+    var: QUINTIQ_WORKSPACE
+
 - name: workspace.yml
   include_tasks: workspace.yml
   when: QUINTIQ_WORKSPACE is defined
