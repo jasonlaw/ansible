@@ -11,7 +11,7 @@
   set_fact:
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
     sitekey: '{{ QUINTIQ_LICENSE.SITEKEY }}'
-    serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\server.key'
+    serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\site_{{ QUINTIQ_LICENSE.SITEKEY }}.key'
     license_path: '{{ QUINTIQ_LICENSE.FILE_PATH }}'
 
 - name: New sitekey
