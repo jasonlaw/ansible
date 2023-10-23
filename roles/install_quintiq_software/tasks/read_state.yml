@@ -11,12 +11,14 @@
 
 - name: Convert the YAML content to an Ansible variable
   set_fact:
-    quintiq_state: '{{ temp_quintiq_state.stdout | from_yaml }}'
-    quintiq_state_ok: true
-  when: temp_quintiq_state.stdout is defined
-  vars:
-    quintiq_state_ok: false
-    
-- name: Display the variable
+    quintiq_info: '{{ temp_quintiq_state.stdout | from_yaml }}'
+  register: quintiq_state
+  ignore_errors: true
+  failed_when: temp_quintiq_state.stdout is not defined
+
+- name: Display the variables
   debug:
-    var: quintiq_state
+    var:
+      - quintiq_state
+      - quintiq_info
+    
