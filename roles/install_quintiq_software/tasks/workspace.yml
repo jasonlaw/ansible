@@ -1,0 +1,50 @@
+---
+- name: Parameters info
+  debug:
+    msg:
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      - QUINTIQ_WORSKPACE = {{ QUINTIQ_WORSKPACE | default('undefined') }}
+
+- name: Set local variables
+  set_fact:
+    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+    
+- name: Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"        
+
+- name: Set models path
+  win_command: qk set workspace models="{{ QUINTIQ_WORKSPACE.MODELS_PATH }}"
+  args:
+    chdir: '{{ install_bin }}'
+  when: >
+    QUINTIQ_WORKSPACE is defined and
+    QUINTIQ_WORKSPACE.MODELS_PATH is defined
+
+- name: Set var path
+  win_command: qk set workspace var="{{ QUINTIQ_WORKSPACE.VAR_PATH }}"
+  args:
+    chdir: '{{ install_bin }}'
+  when: >
+    QUINTIQ_WORKSPACE is defined and
+    QUINTIQ_WORKSPACE.VAR_PATH is defined
+
+- name: Create models path
+  win_file:
+    path: '{{ QUINTIQ_WORKSPACE.MODELS_PATH }}'
+    state: directory
+  when: >
+    QUINTIQ_WORKSPACE is defined and
+    QUINTIQ_WORKSPACE.MODELS_PATH is defined and
+    QUINTIQ_WORKSPACE.MODELS_PATH_CREATE|bool
+
+- name: Create var path
+  win_file:
+    path: '{{ QUINTIQ_WORKSPACE.VAR_PATH }}'
+    state: directory
+  when: >
+    QUINTIQ_WORKSPACE is defined and
+    QUINTIQ_WORKSPACE.VAR_PATH is defined and
+    QUINTIQ_WORKSPACE.VAR_PATH_CREATE|bool

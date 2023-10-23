@@ -1,3 +1,5 @@
 ---
 
 - include_tasks: core.yml
+- include_tasks: workspace.yml
+  when: QUINTIQ_WORKSPACE is defined
