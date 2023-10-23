@@ -10,5 +10,5 @@
   win_copy:
     content: |
       version: '{{ QUINTIQ_VERSION  }}'
-      path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT  }}\quintiq{{ QUINTIQ_VERSION  }}'
+      path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT  }}\quintiq{{ QUINTIQ_VERSION  }}'      
     dest: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT  }}\quintiq.yml'
