@@ -23,12 +23,15 @@
         - "install_dest: {{ install_dest }}"
         - "install_bin: {{ install_bin }}"
         - "temp_path: {{ temp_path }}"
-
         
 - name: Check if {{ install_dest }} directory exists
   win_stat:
     path: '{{ install_dest }}'
   register: directory_check
+
+- name: '{{ install_dest }} directory info'
+  debug:
+    var: directory_check
 
 - name: Unzip source file to {{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}
   win_unzip:
