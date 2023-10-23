@@ -3,14 +3,13 @@
   debug:
     msg:
       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - QUINTIQ_LICENSE = {{ QUINTIQ_LICENSE }}
 
 - name: Set local variables
   set_fact:
-    install_prj: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}'
-    install_path: '{{ QUINTIQ_INSTALL_PATH }}'
-    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\bin'
+    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
     sitekey: '{{ QUINTIQ_LICENSE.SITEKEY }}'
     serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\server.key'
     license_path: '{{ QUINTIQ_LICENSE.FILE_PATH }}'
