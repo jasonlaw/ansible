@@ -11,9 +11,6 @@
     - quintiq_version: "6420"
     - sitekey: "162002"
 
-    - zip_src_path: \\sdcvwdel40\QuintiqReleases\{{ quintiq_version }}-all.zip
-    - zip_path: "c:\\tmp\\{{ quintiq_version }}-all.zip"
-
     - license_src_path: \\sdcvwdel40\QuintiqLicenses\{{ ansible_env.COMPUTERNAME }}\{{ sitekey }}\license.txt
     - license_path: "c:\\tmp\\license_{{ sitekey }}.txt"
 
@@ -24,7 +21,8 @@
       vars:
         QUINTIQ_VERSION: '{{ quintiq_version }}'
         QUINTIQ_INSTALL_PATH: 'D:'
-        QUINTIQ_INSTALL_SRC_NAME: '{{ quintiq_version }}-all'   
+        QUINTIQ_REPO:
+          RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
         QUINTIQ_WORKSPACE:
           MODELS_PATH: 'D:\jumbo\models'
           MODELS_PATH_CREATE: true   
@@ -36,28 +34,28 @@
 
   pre_tasks:
     
-    - name: Check Quintiq State
-      include_role: 
-        name: install_quintiq_software
-        tasks_from: read_state.yml        
+    # - name: Check Quintiq State
+    #   include_role: 
+    #     name: install_quintiq_software
+    #     tasks_from: read_state.yml        
         
-    - name: quintiq_state
-      debug:
-        var: quintiq_state
+    # - name: quintiq_state
+    #   debug:
+    #     var: quintiq_state
 
-    - name: Copy "{{ zip_src_path }}" into tmp folder
-      win_copy: 
-        src: "{{ zip_src_path }}"
-        dest: "{{ zip_path }}"
-        remote_src: true
-      # become: true
-      # become_method: runas
-      # become_user: dsone\jlw1      
-      # vars:
-      #   ansible_become_password: =-09op[]":LKM<>?
-      when: >
-        quintiq_state|length>0 and
-        quintiq_state.version != quintiq_version
+    # - name: Copy "{{ zip_src_path }}" into tmp folder
+    #   win_copy: 
+    #     src: "{{ zip_src_path }}"
+    #     dest: "{{ zip_path }}"
+    #     remote_src: true
+    #   # become: true
+    #   # become_method: runas
+    #   # become_user: dsone\jlw1      
+    #   # vars:
+    #   #   ansible_become_password: =-09op[]":LKM<>?
+    #   when: >
+    #     quintiq_state|length>0 and
+    #     quintiq_state.version != quintiq_version
 
     - name: Check Quintiq Server Key
       include_role: 

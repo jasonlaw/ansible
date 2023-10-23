@@ -1,0 +1,27 @@
+---
+- name: copy_release.yml - Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      - QUINTIQ_REPO = {{ QUINTIQ_REPO }}
+
+- name: copy_release.yml - Set local variables
+  set_fact:        
+    copy_release_src: '{{ QUINTIQ_REPO.RELEASE_PATH }}\{{ QUINTIQ_VERSION }}-all.zip'
+    copy_release_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\resources\releases'
+    copy_release_name: '{{ QUINTIQ_VERSION }}-all'
+    
+- name: Copy '{{ copy_release_src }}' into '{{ copy_release_path }}'
+  win_copy: 
+    src: '{{ copy_release_src }}'
+    dest: '{{ copy_release_path }}'
+    creates: '{{ copy_release_path }}'
+    remote_src: true
+
+- name: Unzip {{ copy_release_path }}\{{ copy_release_name }}.zip
+  win_unzip:
+    src: '{{ copy_release_path }}\{{ copy_release_name }}.zip'
+    dest: '{{ copy_release_path }}'
+  when: copy_release_autoextract|bool
