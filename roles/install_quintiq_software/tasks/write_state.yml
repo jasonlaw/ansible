@@ -15,5 +15,5 @@
     content: |
       quintiq:
         version: '{{ QUINTIQ_VERSION  }}'
-        path: 'QUINTIQ_INSTALL_PATH'
+        path: '{{ QUINTIQ_INSTALL_PATH }}\quintiq{{ QUINTIQ_VERSION  }}'
     dest: 'C:\Quintiq\state.yml'
