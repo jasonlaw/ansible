@@ -18,7 +18,7 @@
     - role: install_quintiq_software
       vars:
         QUINTIQ_VERSION: '{{ quintiq_version }}'
-        QUINTIQ_INSTALL_PATH: 'D:\'
+        QUINTIQ_INSTALL_PATH: 'D:'
         QUINTIQ_INSTALL_SRC_NAME: '{{ quintiq_version }}-all'   
         QUINTIQ_WORKSPACE:
           MODELS_PATH: 'D:\jumbo\models'
