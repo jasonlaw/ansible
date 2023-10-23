@@ -50,6 +50,12 @@
         quintiq_state_ok  and
         quintiq_state.version != quintiq_version
 
+
+    - name: Check Quintiq Server Key
+      include_role: 
+        name: install_quintiq_software
+        tasks_from: read_serverkey.yml     
+
     - name: Copy "{{ license_path }}" into tmp folder
       win_copy: 
         src: "{{ license_src_path }}"
@@ -60,3 +66,4 @@
       become_user: dsone\jlw1      
       vars:
         ansible_become_password: =-09op[]":LKM<>?
+      when: quintiq_serverkey.rc == 1
