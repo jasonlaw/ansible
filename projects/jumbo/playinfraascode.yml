@@ -35,6 +35,10 @@
       include_role: 
         name: install_quintiq_software
         tasks_from: read_state.yml        
+        
+    - name: quintiq_state
+      debug:
+        var: quintiq_state
 
     - name: Copy "{{ zip_src_path }}" into tmp folder
       win_copy: 
@@ -49,7 +53,6 @@
       when: >
         quintiq_state is defined and
         quintiq_state.version != quintiq_version
-
 
     - name: Check Quintiq Server Key
       include_role: 
