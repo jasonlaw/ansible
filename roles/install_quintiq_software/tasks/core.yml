@@ -46,6 +46,7 @@
     src: '{{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}\{{ QUINTIQ_INSTALL_SRC_NAME }}'
     dest: '{{ install_dest }}'
     remote_src: true
+  when: not directory_check.stat.exists
 # - name: Move extracted source to destination {{ install_dest }}
 #   win_shell: |
 #     Copy-Item -Path '{{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}\{{ QUINTIQ_INSTALL_SRC_NAME }}' -Destination "{{ install_dest }}" -Force
