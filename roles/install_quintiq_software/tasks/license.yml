@@ -4,17 +4,16 @@
     msg:
       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
-      - QUINTIQ_SITEKEY = {{ QUINTIQ_SITEKEY }}
-      - QUINTIQ_LICENSE_PATH = {{ QUINTIQ_LICENSE_PATH }}
+      - QUINTIQ_LICENSE = {{ QUINTIQ_LICENSE }}
 
 - name: Set local variables
   set_fact:
     install_prj: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}'
     install_path: '{{ QUINTIQ_INSTALL_PATH }}'
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\bin'
-    sitekey: '{{ QUINTIQ_SITEKEY }}'
+    sitekey: '{{ QUINTIQ_LICENSE.SITEKEY }}'
     serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\server.key'
-    license_path: '{{ QUINTIQ_LICENSE_PATH }}'
+    license_path: '{{ QUINTIQ_LICENSE.FILE_PATH }}'
 
 - name: New sitekey
   win_command: qk new server sitekey {{ sitekey }} {{ serverkey_path }}
