@@ -4,8 +4,9 @@
   become: yes
   become_method: runas
   become_user: dsone\jlw1
-  become_password: '=-09op[]":LKM<>?'
-  
+  vars:
+    become_password: '=-09op[]":LKM<>?'
+
   tasks:
     - include_role:
         name: install_quintiq_software
