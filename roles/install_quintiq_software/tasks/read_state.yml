@@ -1,4 +1,3 @@
----
 - name: Parameters info
   debug:
     msg:
@@ -6,18 +5,33 @@
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       
 - name: Read Quintiq state into quintiq_state variable
-  win_shell: get-content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
+  win_shell: Get-Content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
   register: temp_quintiq_state 
 
 - name: Convert the YAML content to an Ansible variable
   set_fact:
-    quintiq_state: '{{ temp_quintiq_state.stdout | from_yaml }}'
-    quintiq_state_ok: true
-  when: temp_quintiq_state.stdout is defined
-  ignore_errors: true
-  vars:
-    quintiq_state_ok: false
+    quintiq_state: "{{ temp_quintiq_state.stdout | from_yaml | default(omit) }}"
+
+# ---
+# - name: Parameters info
+#   debug:
+#     msg:
+#       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+#       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      
+# - name: Read Quintiq state into quintiq_state variable
+#   win_shell: get-content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
+#   register: temp_quintiq_state 
+
+# - name: Convert the YAML content to an Ansible variable
+#   set_fact:
+#     quintiq_state: '{{ temp_quintiq_state.stdout | from_yaml }}'
+#     quintiq_state_ok: true
+#   when: temp_quintiq_state.stdout is defined
+#   ignore_errors: true
+#   vars:
+#     quintiq_state_ok: false
     
-- name: Display the variable
-  debug:
-    var: quintiq_state
+# - name: Display the variable
+#   debug:
+#     var: quintiq_state

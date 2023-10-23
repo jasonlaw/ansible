@@ -1,0 +1,6 @@
+---
+
+- name: core.yml
+  include_role:
+    name: install_quintiq_software
+    tasks_from: core.yml

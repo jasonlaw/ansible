@@ -1,0 +1,14 @@
+---
+- name: Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+
+- name: Write Quintiq state to a file
+  win_copy:
+    content: |
+      version: '{{ QUINTIQ_VERSION  }}'
+      path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT  }}\quintiq{{ QUINTIQ_VERSION  }}'      
+    dest: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT  }}\quintiq.yml'

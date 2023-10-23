@@ -47,7 +47,7 @@
       vars:
         ansible_become_password: =-09op[]":LKM<>?
       when: >
-        quintiq_state_ok  and
+        quintiq_state is defined and
         quintiq_state.version != quintiq_version
 
 
