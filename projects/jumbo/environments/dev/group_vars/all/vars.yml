@@ -1,0 +1,2 @@
+env: dev
+ansible_shell_type: powershell
