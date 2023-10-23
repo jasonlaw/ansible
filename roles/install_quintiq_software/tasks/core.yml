@@ -44,11 +44,16 @@
     # rm: true
   when: not directory_check.stat.exists
 
-- name: Copy the extracted source to destination {{ install_dest }}
-  win_copy:
-    src: '{{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}\{{ QUINTIQ_INSTALL_SRC_NAME }}'
-    dest: '{{ install_dest }}'
-    remote_src: true
+# - name: Copy the extracted source {{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}\{{ QUINTIQ_INSTALL_SRC_NAME }} to destination {{ install_dest }}
+#   win_copy:
+#     src: '{{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}\{{ QUINTIQ_INSTALL_SRC_NAME }}'
+#     dest: '{{ install_dest }}'
+#     remote_src: true
+#   when: not directory_check.stat.exists
+
+- name: Move extracted source {{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}\{{ QUINTIQ_INSTALL_SRC_NAME }} to destination {{ install_dest }}
+  win_shell: |
+    Move-Item -Path '{{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}\{{ QUINTIQ_INSTALL_SRC_NAME }}' -Destination "{{ install_dest }}" -Force
   when: not directory_check.stat.exists
 
 - name: Copy etc folder to project path
@@ -58,11 +63,6 @@
     remote_src: true
     force: false
   when: not directory_check.stat.exists
-
-# - name: Move extracted source to destination {{ install_dest }}
-#   win_shell: |
-#     Copy-Item -Path '{{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}\{{ QUINTIQ_INSTALL_SRC_NAME }}' -Destination "{{ install_dest }}" -Force
-#   when: not directory_check.stat.exists
 
 - name: Remove extracted temp file {{ temp_path }}\{{ QUINTIQ_INSTALL_SRC_NAME }}
   win_file: 
