@@ -13,7 +13,7 @@
   set_fact:
     install_src: '{{ QUINTIQ_INSTALL_SRC_PATH }}\{{ QUINTIQ_INSTALL_SRC_NAME }}'
     install_dest: '{{ QUINTIQ_INSTALL_PATH }}\quintiq{{ QUINTIQ_VERSION }}'    
-    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\bin'
+    install_bin: '{{ install_dest }}\bin'
     temp_path: 'C:\tmp'
     
 - name: Local variables
