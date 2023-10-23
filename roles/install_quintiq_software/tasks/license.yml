@@ -14,20 +14,33 @@
     serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\site_{{ QUINTIQ_LICENSE.SITEKEY }}.key'
     license_path: '{{ QUINTIQ_LICENSE.FILE_PATH }}'
 
+- name: Check sitekey
+  win_command: qk get server sitekey
+  args:
+    chdir: '{{ install_bin }}'
+  register: qk_sitekey
+  ignore_errors: true 
+
+- set_fact:
+    sitekey_empty: "{{ (qk_sitekey.stdout is defined and qk_sitekey.stdout.startswith('[ERROR]')) | default(true) }}"
+   
 - name: New sitekey
   win_command: qk new server sitekey {{ sitekey }} {{ serverkey_path }}
   args:
     chdir: '{{ install_bin }}'
   ignore_errors: true
+  when: sitekey_empty
 
 - name: Set sitekey of {{ sitekey }}
   win_command: qk set server sitekey {{ sitekey }}
   args:
     chdir: '{{ install_bin }}'
   ignore_errors: true
+  when: sitekey_empty
 
 - name: License
   win_command: qk set server license {{ license_path }} --addrw --overwritelicense --overwritemappings
   args:
     chdir: '{{ install_bin }}'
   ignore_errors: true
+  when: sitekey_empty
