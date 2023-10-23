@@ -2,7 +2,7 @@
 - name: Debug info
   debug:
     msg:
-      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
-      - QUINTIQ_INSTALL_SRC_PATH = {{ QUINTIQ_INSTALL_SRC_PATH }}
-      - QUINTIQ_WORSKPACE = {{ QUINTIQ_WORSKPACE }}
-      - QUINTIQ_LICENSE = {{ QUINTIQ_LICENSE }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH | default('undefined') }}
+      - QUINTIQ_INSTALL_SRC_PATH = {{ QUINTIQ_INSTALL_SRC_PATH | default('undefined') }}
+      - QUINTIQ_WORSKPACE = {{ QUINTIQ_WORSKPACE | default('undefined') }}
+      - QUINTIQ_LICENSE = {{ QUINTIQ_LICENSE | default('undefined') }}
