@@ -4,7 +4,6 @@
     - include_role:
         name: install_quintiq_software
         tasks_from: read_state2.yml
-        register: state
 
     - debug:
-        var: state
+        var: quintiq_state
