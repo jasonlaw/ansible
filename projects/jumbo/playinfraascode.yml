@@ -1,0 +1,31 @@
+---
+- hosts: QAE
+
+  vars:
+  
+    - quintiq_version: "6420"
+    - sitekey: "162002"
+
+    - zip_src_path: \\sdcvwdel40\QuintiqReleases\{{ quintiq_version }}-all.zip
+    - zip_path: "c:\\tmp\\{{ quintiq_version }}-all.zip"
+
+    - license_src_path: \\sdcvwdel40\QuintiqLicenses\{{ ansible_env.COMPUTERNAME }}\{{ sitekey }}\license.txt
+    - license_path: "c:\\tmp\\license_{{ sitekey }}.txt"
+
+
+  roles:
+    
+    - role: install_quintiq_quintiq
+      vars:
+        QUINTIQ_VERSION: '{{ quintiq_version }}'
+        QUINTIQ_INSTALL_PATH: 'D:\'
+        QUINTIQ_INSTALL_SRC_NAME: '{{ quintiq_version }}-all'   
+        QUINTIQ_WORKSPACE:
+          MODELS_PATH: 'D:\jumbo\models'
+          MODELS_PATH_CREATE: true   
+          VAR_PATH: 'D:\jumbo\var'
+          VAR_PATH_CREATE: true
+        QUINTIQ_LICENSE:
+          SITEKEY: '{{ sitekey }}'
+          FILE_PATH: '{{ license_path }}'
+ 

@@ -1,0 +1,8 @@
+---
+- name: Debug info
+  debug:
+    msg:
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      - QUINTIQ_INSTALL_SRC_PATH = {{ QUINTIQ_INSTALL_SRC_PATH }}
+      - QUINTIQ_WORSKPACE = {{ QUINTIQ_WORSKPACE }}
+      - QUINTIQ_LICENSE = {{ QUINTIQ_LICENSE }}
