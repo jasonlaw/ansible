@@ -1,6 +1,11 @@
 ---
 - hosts: QAE
 
+  become: yes
+  become_method: runas
+  become_user: dsone\jlw1
+  become_password: '=-09op[]":LKM<>?'
+
   vars:  
     - QUINTIQ_PROJECT: 'JUMBOHD'
     - quintiq_version: "6420"
