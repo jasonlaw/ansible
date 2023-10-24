@@ -30,6 +30,12 @@
   set_fact:
     model_changed: "{{ copy_model_rc.stat.exists and (copy_model_rc.stat.checksum != (model_checksum.stdout | default(''))) }}"
 
+- debug:
+    msg:
+      - "model_checksum: {{ model_checksum | default('') }}"
+      - "copy_model_rc.stat.checksum: {{ copy_model_rc.stat.checksum }}"
+      - "model_changed: {{ model_changed }}"
+
 - name: model.yml - Install/Upgrade model from '{{ copy_model_rc.stat.path }}'
   win_command: qk new server model {{ copy_model_rc.stat.path }}
   args:
