@@ -26,9 +26,9 @@
     copy_release_autoextract: true
   when: not directory_check.stat.exists
 
-- name: core.yml - Move release build {{ copy_release_path }}\{{ copy_release_name }}\{{ copy_release_name }} to destination {{ install_dest }}
+- name: core.yml - Move release build {{ copy_release_path }}\{{ copy_release_name }} to destination {{ install_dest }}
   win_shell: |
-    Move-Item -Path '{{ copy_release_path }}\{{ copy_release_name }}\{{ copy_release_name }}' -Destination "{{ install_dest }}" -Force
+    Move-Item -Path '{{ copy_release_path }}\{{ copy_release_name }}' -Destination "{{ install_dest }}" -Force
   when: not directory_check.stat.exists
 
 - name: core.yml - Cleanup temp release build {{ copy_release_path }}\{{ copy_release_name }}
@@ -37,7 +37,7 @@
     state: absent
   ignore_errors: true
 
-- name: Copy etc folder to project path
+- name: core.yml - Copy etc folder to project path
   win_copy:
     src: '{{ install_dest }}\etc'
     dest: '{{ install_prj }}'
@@ -45,13 +45,13 @@
     force: false
   when: not directory_check.stat.exists
 
-- name: Check if the workspace file exists
+- name: core.yml - Check if the workspace file exists
   win_stat:
     path: '{{ install_dest }}\default.qworkspace'
   register: workspace_file_info
   ignore_errors: true
 
-- name: Create default workspace
+- name: core.yml - Create default workspace
   win_command: qk new workspace default
   args:
     chdir: '{{ install_bin }}'
@@ -60,7 +60,7 @@
     workspace_file_info.stat.exists is not defined or
     not workspace_file_info.stat.exists
 
-- name: Set root path
+- name: core.yml - Set root path
   win_command: qk set workspace root="{{ install_prj }}"
   args:
     chdir: '{{ install_bin }}'
@@ -68,7 +68,7 @@
     workspace_file_info.stat.exists is not defined or
     not workspace_file_info.stat.exists
 
-- name: Set bin path
+- name: core.yml - Set bin path
   win_command: qk set workspace bin="{{ install_bin }}"
   args:
     chdir: '{{ install_bin }}'
@@ -76,5 +76,5 @@
     workspace_file_info.stat.exists is not defined or
     not workspace_file_info.stat.exists
 
-- name: Update Quintiq state
+- name: core.yml - Update Quintiq state
   include_tasks: write_state.yml
