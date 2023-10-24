@@ -6,7 +6,6 @@
       - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - QUINTIQ_WORKSPACE = {{ QUINTIQ_WORKSPACE | default('undefined') }}
-      - QUINTIQ_LICENSE = {{ QUINTIQ_LICENSE | default('undefined') }}
 
 - name: core.yml - Set local variables
   set_fact:        

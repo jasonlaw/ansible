@@ -5,7 +5,7 @@
       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
       - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
-      - QUINTIQ_LICENSE = {{ QUINTIQ_LICENSE }}
+      - QUINTIQ_SITEKEY = {{ QUINTIQ_SITEKEY }}
 
 - name: license.yml - Set local variables
   set_fact:
@@ -35,9 +35,13 @@
   ignore_errors: true
   when: qk_sitekey.rc == 1
 
+- name: license.yml - Copy license.txt
+  include_tasks: copy_license.yml
+  when: qk_sitekey.rc == 1
+
 - name: license.yml - License
-  win_command: qk set server license {{ license_path }} --addrw --overwritelicense --overwritemappings
+  win_command: qk set server license {{ copy_license_file }} --addrw --overwritelicense --overwritemappings
   args:
     chdir: '{{ install_bin }}'
   ignore_errors: true
-  when: qk_sitekey.rc == 1
+  when: qk_sitekey.rc == 1 and copy_license_file is defined

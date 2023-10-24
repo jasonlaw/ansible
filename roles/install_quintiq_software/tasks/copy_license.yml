@@ -1,0 +1,27 @@
+---
+- name: copy_license.yml - Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      - QUINTIQ_SITEKEY = {{ QUINTIQ_SITEKEY }}
+      - QUINTIQ_REPO = {{ QUINTIQ_REPO }}
+
+- name: copy_license.yml - Set local variables
+  set_fact:        
+    copy_license_src: '{{ QUINTIQ_REPO.LICENSE_PATH }}\{{ ansible_env.COMPUTERNAME }}\{{ QUINTIQ_SITEKEY }}\license.txt'
+    copy_license_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\resources\licenses'
+    copy_license_file: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\resources\licenses\{{ ansible_env.COMPUTERNAME }}_{{ QUINTIQ_SITEKEY }}.txt'
+
+- name: copy_license.yml - Ensure the directory is present
+  win_file:
+    path: '{{ copy_license_path }}'
+    state: directory
+    
+- name: copy_license.yml - Copy '{{ copy_license_src }}' into '{{ copy_license_file }}'
+  win_copy: 
+    src: '{{ copy_license_src }}'
+    dest: '{{ copy_license_file }}'
+    creates: '{{ copy_license_file }}'
+    remote_src: true

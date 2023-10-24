@@ -8,29 +8,22 @@
   vars:  
     - become_password: '=-09op[]":LKM<>?'
     - QUINTIQ_PROJECT: 'JUMBOHD'
-    - quintiq_version: "6420"
-    - sitekey: "162002"
-
-    - license_src_path: \\sdcvwdel40\QuintiqLicenses\{{ ansible_env.COMPUTERNAME }}\{{ sitekey }}\license.txt
-    - license_path: "c:\\tmp\\license_{{ sitekey }}.txt"
-
 
   roles:
     
     - role: install_quintiq_software
       vars:
-        QUINTIQ_VERSION: '{{ quintiq_version }}'
+        QUINTIQ_SITEKEY: '162002'
+        QUINTIQ_VERSION: '6420'
         QUINTIQ_INSTALL_PATH: 'D:'
         QUINTIQ_REPO:
           RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
+          LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
         QUINTIQ_WORKSPACE:
           MODELS_PATH: 'D:\jumbo\models'
           MODELS_PATH_CREATE: true   
           VAR_PATH: 'D:\jumbo\var'
-          VAR_PATH_CREATE: true
-        QUINTIQ_LICENSE:
-          SITEKEY: '{{ sitekey }}'
-          FILE_PATH: '{{ license_path }}'
+          VAR_PATH_CREATE: true        
 
   pre_tasks:
     

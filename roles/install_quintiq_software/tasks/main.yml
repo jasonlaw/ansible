@@ -9,4 +9,4 @@
 
 - name: license.yml
   include_tasks: license.yml
-  when: QUINTIQ_LICENSE is defined
+  when: QUINTIQ_SITEKEY is defined
