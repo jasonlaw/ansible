@@ -29,11 +29,4 @@
   win_stat:
     path: '{{ copy_model_file }}'
     get_checksum: true
-  register: copy_model_file_rc
-
-
-- debug:
-    var: copy_model_file_rc
-
-- debug:
-    var: copy_model_file
+  register: copy_model_rc

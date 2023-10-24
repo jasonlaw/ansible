@@ -10,3 +10,7 @@
 - name: license.yml
   include_tasks: license.yml
   when: QUINTIQ_SITEKEY is defined
+
+- name: model.yml
+  include_tasks: license.yml
+  when: QUINTIQ_MODEL is defined

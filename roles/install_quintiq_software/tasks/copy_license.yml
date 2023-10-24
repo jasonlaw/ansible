@@ -25,3 +25,8 @@
     dest: '{{ copy_license_file }}'
     creates: '{{ copy_license_file }}'
     remote_src: true
+
+- name: copy_license.yml - License file state
+  win_stat:
+    path: '{{ copy_license_file }}'
+  register: copy_license_rc

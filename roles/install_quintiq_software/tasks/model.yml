@@ -7,47 +7,52 @@
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - QUINTIQ_MODEL = {{ QUINTIQ_MODEL }}
 
+- name: core.yml - Set local variables
+  set_fact:        
+    install_release_name: '{{ QUINTIQ_VERSION }}-all'
+    install_prj: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}'
+    install_dest: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}'    
+    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+
 - name: model.yml - Copy model source
   include_tasks: copy_model.yml
 
-# - name: model.yml - Set local variables
-#   set_fact:
-#     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
-#     license_serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\site_{{ QUINTIQ_SITEKEY }}.key'
+- name: model.yml - Read stored model checksum
+  win_shell: Get-Content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq_model.yml'
+  register: model_checksum
+  ignore_errors: true
+  when: copy_model.stat.exists
 
-# - name: Install/Upgrade model
-#   win_command: qk new server model D:\Quicosolution642.qproject
-#   args:
-#     chdir: d:\quintiq\bin\
-#   register: qk_model
+- name: model.yml - Check if any changes
+  set_fact:
+    model_changed: "{{ copy_model.stat.exists and (copy_model.stat.checksum != (model_checksum.stdout | default(''))) }}"
 
-# - name: Set active model
-#   win_command: qk set server model Quicosolution
-#   args:
-#     chdir: d:\quintiq\bin\
-#   register: qk_model_active
-#   when: qk_model.changed
+- name: Install/Upgrade model
+  win_command: qk new server model '{{ copy_model.stat.path }}'
+  args:
+    chdir: '{{ install_bin }}'
+  register: qk_model
 
-# - name: Set active model
-#   win_command: qk set server model Quicosolution
-#   args:
-#     chdir: d:\quintiq\bin\
-#   register: qk_model_active
-#   when: qk_model.changed
+- name: Set active model
+  win_command: qk set server model '{{ QUINTIQ_MODEL }}'
+  args:
+    chdir: '{{ install_bin }}'
+  register: qk_model_active
+  when: qk_model.changed
 
-# - name: New configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
-#   win_command: qk new server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}] --local
-#   args:
-#     chdir: d:\quintiq\bin\
-#   register: qk_configset_new
-#   when: qk_model.changed
-#   ignore_errors: yes
-#   changed_when: qk_configset_new.rc == 0 
+- name: New configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+  win_command: qk new server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}] --local
+  args:
+    chdir: '{{ install_bin }}'
+  register: qk_configset_new
+  when: qk_model.changed
+  ignore_errors: true
+  changed_when: qk_configset_new.rc == 0 
 
-# - name: Set configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
-#   win_command: qk set server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
-#   args:
-#     chdir: d:\quintiq\bin\
-#   register: qk_configset_set
-#   when: qk_configset_new.changed
+- name: Set configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+  win_command: qk set server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+  args:
+    chdir: '{{ install_bin }}'
+  register: qk_configset_set
+  when: qk_configset_new.changed
 
