@@ -10,6 +10,7 @@
 
 - name: copy_model.yml - Set local variables
   set_fact:        
+    copy_model_src: '{{ QUINTIQ_REPO.MODEL_PATH }}\{{ QUINTIQ_MODEL }}'
     copy_model_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\resources\models'
     copy_model_file: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\resources\models\{{ QUINTIQ_MODEL }}'
 
@@ -20,7 +21,7 @@
     
 - name: copy_model.yml - Copy '{{ QUINTIQ_REPO.MODEL_FILE }}' into '{{ copy_model_file }}'
   win_copy: 
-    src: '{{ QUINTIQ_REPO.MODEL_FILE }}'
+    src: '{{ copy_model_src }}'
     dest: '{{ copy_model_file }}'
     creates: '{{ copy_model_file }}'
     remote_src: true

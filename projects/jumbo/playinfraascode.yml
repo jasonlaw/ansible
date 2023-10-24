@@ -16,11 +16,11 @@
         QUINTIQ_SITEKEY: '162002'
         QUINTIQ_VERSION: '6420'
         QUINTIQ_INSTALL_PATH: 'D:'
-        QUINTIQ_MODEL: 'Quicosolution'
+        QUINTIQ_MODEL: 'Quicosolution642.qproject'
         QUINTIQ_REPO:
           RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
           LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
-          MODEL_FILE: 'D:\Quicosolution642.qproject'
+          MODEL_PATH: 'D:'
         QUINTIQ_WORKSPACE:
           MODELS_PATH: 'D:\jumbo\models'
           MODELS_PATH_CREATE: true   

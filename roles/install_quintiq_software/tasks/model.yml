@@ -5,13 +5,9 @@
       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
       - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
-      - QUINTIQ_MODEL = {{ QUINTIQ_MODEL }}
 
-- name: core.yml - Set local variables
+- name: model.yml - Set local variables
   set_fact:        
-    install_release_name: '{{ QUINTIQ_VERSION }}-all'
-    install_prj: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}'
-    install_dest: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}'    
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
 - name: model.yml - Copy model source
@@ -27,18 +23,19 @@
   set_fact:
     model_changed: "{{ copy_model_rc.stat.exists and (copy_model_rc.stat.checksum != (model_checksum.stdout | default(''))) }}"
 
-- name: Install/Upgrade model
-  win_command: qk new server model '{{ copy_model_rc.stat.path }}'
+- name: Install/Upgrade model from '{{ copy_model_rc.stat.path }}'
+  win_command: qk new server model '{{ copy_model_rc.stat.path }}' --apply
   args:
     chdir: '{{ install_bin }}'
   register: qk_model
+  when: model_changed
 
-- name: Set active model
-  win_command: qk set server model '{{ QUINTIQ_MODEL }}'
-  args:
-    chdir: '{{ install_bin }}'
-  register: qk_model_active
-  when: qk_model.changed
+# - name: Set active model
+#   win_command: qk set server model '{{ QUINTIQ_MODEL }}'
+#   args:
+#     chdir: '{{ install_bin }}'
+#   register: qk_model_active
+#   when: qk_model.changed
 
 - name: New configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
   win_command: qk new server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}] --local
