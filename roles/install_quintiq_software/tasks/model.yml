@@ -25,7 +25,7 @@
     model_changed: "{{ copy_model_rc.stat.exists and (copy_model_rc.stat.checksum != (model_checksum.stdout | default(''))) }}"
 
 - name: Install/Upgrade model from '{{ copy_model_rc.stat.path }}'
-  win_command: qk new server model '{{ copy_model_rc.stat.path }}' 
+  win_command: qk new server model {{ copy_model_rc.stat.path }}
   args:
     chdir: '{{ install_bin }}'
   register: qk_model
