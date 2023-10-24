@@ -6,7 +6,7 @@
       - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - QUINTIQ_COMPONENT = {{ QUINTIQ_COMPONENT }}
-      - QUINTIQ_SUBCOMPONENT = {{ QUINTIQ_SUBCOMPONENT }}
+      - QUINTIQ_SUBCOMPONENT = {{ QUINTIQ_SUBCOMPONENT | default('undefined') }}
 
 - name: Set local variables
   set_fact:        
@@ -18,8 +18,8 @@
     chdir: '{{ install_bin }}'
   loop: "{{ component_properties }}"
   when: >
-    QUINTIQ_COMPONENT != '' and 
-    QUINTIQ_SUBCOMPONENT == '' and
+    QUINTIQ_COMPONENT is defined and 
+    QUINTIQ_SUBCOMPONENT is not defined and
     item.key is defined and 
     item.value is defined
 
@@ -29,7 +29,7 @@
     chdir: '{{ install_bin }}'
   loop: "{{ component_properties }}"
   when: >
-    QUINTIQ_COMPONENT != '' and 
-    QUINTIQ_SUBCOMPONENT != '' and
+    QUINTIQ_COMPONENT is defined and 
+    QUINTIQ_SUBCOMPONENT is defined and
     item.key is defined and 
     item.value is defined
