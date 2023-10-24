@@ -36,6 +36,7 @@
     path: '{{ copy_release_path }}\{{ copy_release_name }}'
     state: absent
   ignore_errors: true
+  when: copy_release_path is defined and copy_release_name is defined
 
 - name: core.yml - Copy etc folder to project path
   win_copy:
