@@ -12,6 +12,11 @@
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
     serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\site_{{ QUINTIQ_SITEKEY }}.key'
 
+- name: read_serverkey.yml - Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"  
+
 - name: read_serverkey.yml - Check sitekey {{ serverkey_path }}
   win_command: qk get server sitekey
   args:

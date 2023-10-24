@@ -11,6 +11,11 @@
   set_fact:        
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
+- name: model.yml - Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"  
+
 - name: model.yml - Copy model source
   include_tasks: copy_model.yml
 

@@ -13,7 +13,12 @@
     install_prj: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}'
     install_dest: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}'    
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
-            
+
+- name: core.yml - Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"  
+
 - name: core.yml - Check if {{ install_dest }} directory exists
   win_stat:
     path: '{{ install_dest }}'
