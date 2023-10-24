@@ -10,9 +10,7 @@
 - name: license.yml - Set local variables
   set_fact:
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
-    sitekey: '{{ QUINTIQ_LICENSE.SITEKEY }}'
-    serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\site_{{ QUINTIQ_LICENSE.SITEKEY }}.key'
-    license_path: '{{ QUINTIQ_LICENSE.FILE_PATH }}'
+    license_serverkey_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\site_{{ QUINTIQ_SITEKEY }}.key'
 
 - name: license.yml - Check sitekey {{ serverkey_path }}
   win_command: qk get server sitekey
@@ -22,14 +20,14 @@
   ignore_errors: true 
 
 - name: license.yml - New sitekey
-  win_command: qk new server sitekey {{ sitekey }} {{ serverkey_path }}
+  win_command: qk new server sitekey {{ QUINTIQ_SITEKEY }} {{ license_serverkey_path }}
   args:
     chdir: '{{ install_bin }}'
   ignore_errors: true
   when: qk_sitekey.rc == 1
 
-- name: license.yml - Set sitekey of {{ sitekey }}
-  win_command: qk set server sitekey {{ sitekey }}
+- name: license.yml - Set sitekey of {{ QUINTIQ_SITEKEY }}
+  win_command: qk set server sitekey {{ QUINTIQ_SITEKEY }}
   args:
     chdir: '{{ install_bin }}'
   ignore_errors: true
