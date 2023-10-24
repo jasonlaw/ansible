@@ -15,4 +15,4 @@
 
     - debug:
         var: 
-          - quintiq_state_rc
+          - read_state_rc

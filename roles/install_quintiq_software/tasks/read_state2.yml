@@ -12,6 +12,7 @@
 - name: Convert the YAML content to an Ansible variable
   set_fact:
     quintiq_state: "{{ temp_quintiq_state.stdout | from_yaml }}"
+  register: read_state_rc
   ignore_errors: true
 
 # ---
