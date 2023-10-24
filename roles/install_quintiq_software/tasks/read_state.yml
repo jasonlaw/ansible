@@ -1,15 +1,15 @@
-- name: Parameters info
+- name: read_state.yml - Parameters info
   debug:
     msg:
       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       
-- name: Read Quintiq state into quintiq_state variable
+- name: read_state.yml - Read Quintiq state into quintiq_state variable
   win_shell: Get-Content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq.yml'
   register: temp_quintiq_state 
   ignore_errors: true
 
-- name: Convert the YAML content to an Ansible variable
+- name: read_state.yml - Convert the YAML content to an Ansible variable
   set_fact:
     quintiq_state: "{{ temp_quintiq_state.stdout | from_yaml | default(omit) }}"
 

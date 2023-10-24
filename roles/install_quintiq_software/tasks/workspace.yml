@@ -1,5 +1,5 @@
 ---
-- name: Parameters info
+- name: workspace.yml - Parameters info
   debug:
     msg:
       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
@@ -7,7 +7,7 @@
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - QUINTIQ_WORKSPACE = {{ QUINTIQ_WORKSPACE | default('undefined') }}
 
-- name: Set local variables
+- name: workspace.yml - Set local variables
   set_fact:
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
     
@@ -16,7 +16,7 @@
     msg:
         - "install_bin: {{ install_bin }}"        
 
-- name: Set models path
+- name: workspace.yml - Set models path
   win_command: qk set workspace models="{{ QUINTIQ_WORKSPACE.MODELS_PATH }}"
   args:
     chdir: '{{ install_bin }}'
@@ -24,7 +24,7 @@
     QUINTIQ_WORKSPACE is defined and
     QUINTIQ_WORKSPACE.MODELS_PATH is defined
 
-- name: Set var path
+- name: workspace.yml - Set var path
   win_command: qk set workspace var="{{ QUINTIQ_WORKSPACE.VAR_PATH }}"
   args:
     chdir: '{{ install_bin }}'
@@ -32,7 +32,7 @@
     QUINTIQ_WORKSPACE is defined and
     QUINTIQ_WORKSPACE.VAR_PATH is defined
 
-- name: Create models path
+- name: workspace.yml - Create models path
   win_file:
     path: '{{ QUINTIQ_WORKSPACE.MODELS_PATH }}'
     state: directory
@@ -41,7 +41,7 @@
     QUINTIQ_WORKSPACE.MODELS_PATH is defined and
     QUINTIQ_WORKSPACE.MODELS_PATH_CREATE|bool
 
-- name: Create var path
+- name: workspace.yml - Create var path
   win_file:
     path: '{{ QUINTIQ_WORKSPACE.VAR_PATH }}'
     state: directory

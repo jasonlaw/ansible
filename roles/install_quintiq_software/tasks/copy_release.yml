@@ -29,4 +29,5 @@
   win_unzip:
     src: '{{ copy_release_path }}\{{ copy_release_name }}.zip'
     dest: '{{ copy_release_path }}'
+    creates: '{{ copy_release_path }}'
   when: copy_release_autoextract|bool
