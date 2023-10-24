@@ -1,0 +1,22 @@
+---
+
+- name: component.yml - Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      - QUINTIQ_COMPONENT = {{ QUINTIQ_COMPONENT }}
+
+- name: component.yml - Set local variables
+  set_fact:        
+    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+
+- name: component.yml - Set properties values for component {{ QUINTIQ_COMPONENT }}
+  win_command: qk set {{ QUINTIQ_COMPONENT }} {{ item.key }}={{ item.value }}
+  args:
+    chdir: '{{ install_bin }}'
+  loop: "{{ component_properties }}"
+  when: >
+    item.key is defined and 
+    item.value is defined

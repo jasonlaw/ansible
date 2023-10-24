@@ -1,35 +1,8 @@
 ---
-- name: Parameters info
-  debug:
-    msg:
-      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
-      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
-      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
-      - QUINTIQ_COMPONENT = {{ QUINTIQ_COMPONENT }}
-      - QUINTIQ_SUBCOMPONENT = {{ QUINTIQ_SUBCOMPONENT | default('undefined') }}
+- name: component.yml
+  include_tasks: component.yml
+  when: QUINTIQ_COMPONENT is defined and QUINTIQ_SUBCOMPONENT is not defined
 
-- name: Set local variables
-  set_fact:        
-    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
-
-- name: Set properties values for component {{ QUINTIQ_COMPONENT }}
-  win_command: qk set {{ QUINTIQ_COMPONENT }} {{ item.key }}={{ item.value }}
-  args:
-    chdir: '{{ install_bin }}'
-  loop: "{{ component_properties }}"
-  when: >
-    QUINTIQ_COMPONENT is defined and 
-    QUINTIQ_SUBCOMPONENT is not defined and
-    item.key is defined and 
-    item.value is defined
-
-- name: Set properties values for component {{ QUINTIQ_COMPONENT }}
-  win_command: qk set {{ QUINTIQ_COMPONENT }} {{ QUINTIQ_SUBCOMPONENT }} {{ item.key }}={{ item.value }}
-  args:
-    chdir: '{{ install_bin }}'
-  loop: "{{ component_properties }}"
-  when: >
-    QUINTIQ_COMPONENT is defined and 
-    QUINTIQ_SUBCOMPONENT is defined and
-    item.key is defined and 
-    item.value is defined
+- name: subcomponent.yml
+  include_tasks: subcomponent.yml
+  when: QUINTIQ_COMPONENT is defined and QUINTIQ_SUBCOMPONENT is defined
