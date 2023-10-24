@@ -16,16 +16,18 @@
         QUINTIQ_SITEKEY: '162002'
         QUINTIQ_VERSION: '6420'
         QUINTIQ_INSTALL_PATH: 'D:'
+        QUINTIQ_MODEL: 'Quicosolution'
         QUINTIQ_REPO:
           RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
           LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
+          MODEL_FILE: 'D:\Quicosolution642.qproject'
         QUINTIQ_WORKSPACE:
           MODELS_PATH: 'D:\jumbo\models'
           MODELS_PATH_CREATE: true   
           VAR_PATH: 'D:\jumbo\var'
           VAR_PATH_CREATE: true        
 
-  pre_tasks:
+  # pre_tasks:
     
     # - name: Check Quintiq State
     #   include_role: 
@@ -50,19 +52,19 @@
     #     quintiq_state|length>0 and
     #     quintiq_state.version != quintiq_version
 
-    - name: Check Quintiq Server Key
-      include_role: 
-        name: install_quintiq_software
-        tasks_from: read_serverkey.yml     
+    # - name: Check Quintiq Server Key
+    #   include_role: 
+    #     name: install_quintiq_software
+    #     tasks_from: read_serverkey.yml     
 
-    - name: Copy "{{ license_path }}" into tmp folder
-      win_copy: 
-        src: "{{ license_src_path }}"
-        dest: "{{ license_path }}"
-        remote_src: true
-      # become: true
-      # become_method: runas
-      # become_user: dsone\jlw1      
-      # vars:
-      #   ansible_become_password: =-09op[]":LKM<>?
-      when: quintiq_serverkey.rc == 1
+    # - name: Copy "{{ license_path }}" into tmp folder
+    #   win_copy: 
+    #     src: "{{ license_src_path }}"
+    #     dest: "{{ license_path }}"
+    #     remote_src: true
+    #   # become: true
+    #   # become_method: runas
+    #   # become_user: dsone\jlw1      
+    #   # vars:
+    #   #   ansible_become_password: =-09op[]":LKM<>?
+    #   when: quintiq_serverkey.rc == 1
