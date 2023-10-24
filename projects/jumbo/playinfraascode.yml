@@ -33,52 +33,12 @@
       vars:
         QUINTIQ_COMPONENT: 'server'
         component_properties:
-        - { key: 'serviceportgroup.serviceportgroup1.serviceport0.port', value: 6100 }
+        - { key: 'serviceportgroup.serviceportgroup1.serviceport0.port', value: 7000 }
     
     - role: config_quintiq_component
       vars:
         QUINTIQ_COMPONENT: 'tce'
         component_properties:
-        - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 6100 }
+        - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
 
-  # pre_tasks:
-    
-    # - name: Check Quintiq State
-    #   include_role: 
-    #     name: install_quintiq_software
-    #     tasks_from: read_state.yml        
-        
-    # - name: quintiq_state
-    #   debug:
-    #     var: quintiq_state
-
-    # - name: Copy "{{ zip_src_path }}" into tmp folder
-    #   win_copy: 
-    #     src: "{{ zip_src_path }}"
-    #     dest: "{{ zip_path }}"
-    #     remote_src: true
-    #   # become: true
-    #   # become_method: runas
-    #   # become_user: dsone\jlw1      
-    #   # vars:
-    #   #   ansible_become_password: =-09op[]":LKM<>?
-    #   when: >
-    #     quintiq_state|length>0 and
-    #     quintiq_state.version != quintiq_version
-
-    # - name: Check Quintiq Server Key
-    #   include_role: 
-    #     name: install_quintiq_software
-    #     tasks_from: read_serverkey.yml     
-
-    # - name: Copy "{{ license_path }}" into tmp folder
-    #   win_copy: 
-    #     src: "{{ license_src_path }}"
-    #     dest: "{{ license_path }}"
-    #     remote_src: true
-    #   # become: true
-    #   # become_method: runas
-    #   # become_user: dsone\jlw1      
-    #   # vars:
-    #   #   ansible_become_password: =-09op[]":LKM<>?
-    #   when: quintiq_serverkey.rc == 1
+  
