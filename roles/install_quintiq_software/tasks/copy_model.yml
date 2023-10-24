@@ -34,3 +34,6 @@
 
 - debug:
     var: copy_model_file_rc
+
+- debug:
+    var: copy_model_file
