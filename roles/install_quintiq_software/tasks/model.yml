@@ -1,15 +1,14 @@
-# ---
-# - name: model.yml - Parameters info
-#   debug:
-#     msg:
-#       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
-#       - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
-#       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
-#       - QUINTIQ_MODEL = {{ QUINTIQ_MODEL }}
+---
+- name: model.yml - Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      - QUINTIQ_MODEL = {{ QUINTIQ_MODEL }}
 
-# - name: model.yml - Copy model source
-#   include_tasks: copy_model.yml
-
+- name: model.yml - Copy model source
+  include_tasks: copy_model.yml
 
 # - name: model.yml - Set local variables
 #   set_fact:
