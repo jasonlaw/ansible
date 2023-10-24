@@ -16,7 +16,9 @@
         QUINTIQ_SITEKEY: '162002'
         QUINTIQ_VERSION: '6420'
         QUINTIQ_INSTALL_PATH: 'D:'
-        QUINTIQ_MODEL: 'Quicosolution642.qproject'
+        QUINTIQ_MODEL: 
+          SOURCE: 'Quicosolution642.qproject'
+          NAME: 'Quicosolution'
         QUINTIQ_REPO:
           RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
           LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
