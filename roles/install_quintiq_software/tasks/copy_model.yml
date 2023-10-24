@@ -26,7 +26,7 @@
     remote_src: true
 
 - name: copy_model.yml - model file stat
-  win_state:
+  win_stat:
     path: copy_model_file
   register: copy_model_file_rc
 
