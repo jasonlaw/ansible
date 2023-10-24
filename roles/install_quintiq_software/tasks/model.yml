@@ -21,14 +21,14 @@
   win_shell: Get-Content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq_model.yml'
   register: model_checksum
   ignore_errors: true
-  when: copy_model.stat.exists
+  when: copy_model_rc.stat.exists
 
 - name: model.yml - Check if any changes
   set_fact:
-    model_changed: "{{ copy_model.stat.exists and (copy_model.stat.checksum != (model_checksum.stdout | default(''))) }}"
+    model_changed: "{{ copy_model_rc.stat.exists and (copy_model_rc.stat.checksum != (model_checksum.stdout | default(''))) }}"
 
 - name: Install/Upgrade model
-  win_command: qk new server model '{{ copy_model.stat.path }}'
+  win_command: qk new server model '{{ copy_model_rc.stat.path }}'
   args:
     chdir: '{{ install_bin }}'
   register: qk_model

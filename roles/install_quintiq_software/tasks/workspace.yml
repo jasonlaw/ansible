@@ -11,7 +11,7 @@
   set_fact:
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
     
-- name: Local variables
+- name: workspace.yml - Local variables
   debug:
     msg:
         - "install_bin: {{ install_bin }}"        
