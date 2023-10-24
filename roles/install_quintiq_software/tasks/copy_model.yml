@@ -33,7 +33,7 @@
 
 
 - debug:
-    var: copy_model_file_rc
+    var: copy_model_file_rc.stat.checksum
 
 - debug:
     var: copy_model_file
