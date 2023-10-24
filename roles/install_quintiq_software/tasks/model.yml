@@ -28,7 +28,7 @@
 
 - name: model.yml - Check if any changes
   set_fact:
-    model_changed: "{{ not (copy_model_rc.stat.exists | default(false) or (copy_model_rc.stat.checksum | replace('\r\n', '') != (model_checksum.stdout | replace('\r\n', '')) | default(''))) }}"
+    model_changed: "{{ (copy_model_rc.stat.exists | default(false) and (copy_model_rc.stat.checksum != (model_checksum.stdout | replace('\r\n', '')) | default(''))) }}"
 
 - debug:
     msg:
