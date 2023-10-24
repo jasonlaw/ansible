@@ -13,7 +13,7 @@
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
 - name: Set properties values for component {{ QUINTIQ_COMPONENT }}
-  win_command: qk set server {{ QUINTIQ_COMPONENT }} {{ item.key }}=item.value
+  win_command: qk set {{ QUINTIQ_COMPONENT }} {{ item.key }}=item.value
   args:
     chdir: '{{ install_bin }}'
   loop: "{{ component_properties }}"
@@ -24,7 +24,7 @@
     item.value is defined
 
 - name: Set properties values for component {{ QUINTIQ_COMPONENT }}
-  win_command: qk set server {{ QUINTIQ_COMPONENT }} {{ QUINTIQ_SUBCOMPONENT }} {{ item.key }}=item.value
+  win_command: qk set {{ QUINTIQ_COMPONENT }} {{ QUINTIQ_SUBCOMPONENT }} {{ item.key }}=item.value
   args:
     chdir: '{{ install_bin }}'
   loop: "{{ component_properties }}"
