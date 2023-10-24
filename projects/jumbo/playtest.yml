@@ -11,17 +11,18 @@
     - include_role:
         name: install_quintiq_software
         tasks_from: model.yml
-        vars:         
-          QUINTIQ_SITEKEY: '162002'
-          QUINTIQ_VERSION: '6420'
-          QUINTIQ_INSTALL_PATH: 'D:'
-          QUINTIQ_MODEL: 'Quicosolution'
-          QUINTIQ_REPO:
-            RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
-            LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
-            MODEL_FILE: 'D:\Quicosolution642.qproject'
-          QUINTIQ_WORKSPACE:
-            MODELS_PATH: 'D:\jumbo\models'
-            MODELS_PATH_CREATE: true   
-            VAR_PATH: 'D:\jumbo\var'
-            VAR_PATH_CREATE: true     
+      vars:
+        QUINTIQ_PROJECT: 'JUMBOHD'         
+        QUINTIQ_SITEKEY: '162002'
+        QUINTIQ_VERSION: '6420'
+        QUINTIQ_INSTALL_PATH: 'D:'
+        QUINTIQ_MODEL: 'Quicosolution'
+        QUINTIQ_REPO:
+          RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
+          LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
+          MODEL_FILE: 'D:\Quicosolution642.qproject'
+        QUINTIQ_WORKSPACE:
+          MODELS_PATH: 'D:\jumbo\models'
+          MODELS_PATH_CREATE: true   
+          VAR_PATH: 'D:\jumbo\var'
+          VAR_PATH_CREATE: true     
