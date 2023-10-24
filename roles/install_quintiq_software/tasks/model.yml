@@ -37,7 +37,7 @@
   when: model_changed
 
 - name: Set active model
-  win_command: qk set server model '{{ QUINTIQ_MODEL.NAME }}'
+  win_command: qk set server model {{ QUINTIQ_MODEL.NAME }}
   args:
     chdir: '{{ install_bin }}'
   register: qk_model_active
