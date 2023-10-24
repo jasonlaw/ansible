@@ -10,6 +10,7 @@
 - name: model.yml - Set local variables
   set_fact:        
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+    model_checksum_file: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq_model.yml'
 
 - name: model.yml - Local variables
   debug:
@@ -20,7 +21,7 @@
   include_tasks: copy_model.yml
 
 - name: model.yml - Read stored model checksum
-  win_shell: Get-Content '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq_model.yml'
+  win_shell: Get-Content '{{ model_checksum_file }}'
   register: model_checksum
   ignore_errors: true
   when: copy_model_rc.stat.exists
@@ -29,21 +30,29 @@
   set_fact:
     model_changed: "{{ copy_model_rc.stat.exists and (copy_model_rc.stat.checksum != (model_checksum.stdout | default(''))) }}"
 
-- name: Install/Upgrade model from '{{ copy_model_rc.stat.path }}'
+- name: model.yml - Install/Upgrade model from '{{ copy_model_rc.stat.path }}'
   win_command: qk new server model {{ copy_model_rc.stat.path }}
   args:
     chdir: '{{ install_bin }}'
   register: qk_model
   when: model_changed
 
-- name: Set active model
+- name: model.yml - Store model checksum
+  win_copy:
+    content: '{{ copy_model_rc.stat.checksum }}'
+    dest: '{{ model_checksum_file }}'
+  when: model_changed
+  ignore_errors: true
+
+- name: model.yml - Set active model
   win_command: qk set server model {{ QUINTIQ_MODEL.NAME }}
   args:
     chdir: '{{ install_bin }}'
   register: qk_model_active
   when: qk_model.changed
+  ignore_errors: true
 
-- name: New configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+- name: model.yml - New configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
   win_command: qk new server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}] --local
   args:
     chdir: '{{ install_bin }}'
@@ -52,7 +61,7 @@
   ignore_errors: true
   changed_when: qk_configset_new.rc == 0 
 
-- name: Set configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+- name: model.yml - Set configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
   win_command: qk set server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
   args:
     chdir: '{{ install_bin }}'
