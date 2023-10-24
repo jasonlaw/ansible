@@ -28,11 +28,8 @@
 
 - name: model.yml - Check if any changes
   set_fact:
-    model_changed: "{{ copy_model_rc.stat.exists | default(false) and copy_model_rc.stat.checksum | is_checksum_contained(model_checksum.stdout) | default(false) }}"
-  register: debug_result
-
-- debug:
-    var: debug_result
+    model_changed: "{{ copy_model_rc.stat.exists | default(false) }}"
+  when: "copy_model_rc.stat.checksum | replace('\r\n', '') != model_checksum.stdout | replace('\r\n', '')"
 
 - debug:
     msg:
