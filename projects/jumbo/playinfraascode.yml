@@ -8,13 +8,13 @@
   vars:  
     - become_password: '=-09op[]":LKM<>?'
     - QUINTIQ_PROJECT: 'JUMBOHD'
+    - QUINTIQ_VERSION: '6420'
 
   roles:
     
     - role: install_quintiq_software
       vars:
         QUINTIQ_SITEKEY: '162002'
-        QUINTIQ_VERSION: '6420'
         QUINTIQ_INSTALL_PATH: 'D:'
         QUINTIQ_MODEL: 
           SOURCE: 'Quicosolution642.qproject'
@@ -41,4 +41,23 @@
         component_properties:
         - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
 
-  
+- hosts: TCE
+
+  become: yes
+  become_method: runas
+  become_user: dsone\jlw1  
+
+  vars:  
+    - become_password: '=-09op[]":LKM<>?'
+    - QUINTIQ_PROJECT: 'JUMBOHD'
+    - QUINTIQ_VERSION: '6420'
+
+  roles:
+    
+    - role: install_quintiq_component
+      vars:
+        QUINTIQ_INSTALL_PATH: 'D:'
+        QUINTIQ_REPO:
+          RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
+          LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
+          MODEL_PATH: 'D:'
