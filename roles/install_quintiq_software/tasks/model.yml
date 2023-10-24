@@ -29,6 +29,10 @@
 - name: model.yml - Check if any changes
   set_fact:
     model_changed: "{{ copy_model_rc.stat.exists | default(false) and (copy_model_rc.stat.checksum in model_checksum.stdout) }}"
+  register: debug_result
+
+- debug:
+    var: debug_result
 
 - debug:
     msg:
