@@ -12,5 +12,5 @@
   when: QUINTIQ_SITEKEY is defined
 
 - name: model.yml
-  include_tasks: license.yml
+  include_tasks: model.yml
   when: QUINTIQ_MODEL is defined
