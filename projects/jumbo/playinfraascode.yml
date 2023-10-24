@@ -27,7 +27,19 @@
           MODELS_PATH: 'D:\jumbo\models'
           MODELS_PATH_CREATE: true   
           VAR_PATH: 'D:\jumbo\var'
-          VAR_PATH_CREATE: true        
+          VAR_PATH_CREATE: true   
+
+    - role: config_quintiq_component
+      vars:
+        QUINTIQ_COMPONENT: 'server'
+        component_properties:
+        - { key: 'serviceportgroup.serviceportgroup1.serviceport0.port', value: 6100 }
+    
+    - role: config_quintiq_component
+      vars:
+        QUINTIQ_COMPONENT: 'tce'
+        component_properties:
+        - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 6100 }
 
   # pre_tasks:
     
