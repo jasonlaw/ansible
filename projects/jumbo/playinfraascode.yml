@@ -8,14 +8,15 @@
   vars:  
     - become_password: '=-09op[]":LKM<>?'
     - QUINTIQ_PROJECT: 'JUMBOHD'
-    - QUINTIQ_VERSION: '6420'
+    - QUINTIQ_VERSION: '6420'    
+    - QUINTIQ_INSTALL_PATH: 'D:'
+    - quintiq_install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
   roles:
     
     - role: install_quintiq_software
       vars:
-        QUINTIQ_SITEKEY: '162002'
-        QUINTIQ_INSTALL_PATH: 'D:'
+        QUINTIQ_SITEKEY: '162002'        
         QUINTIQ_MODEL: 
           SOURCE: 'Quicosolution642.qproject'
           NAME: 'Quicosolution'
@@ -41,6 +42,20 @@
         component_properties:
         - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
 
+    - role: config_quintiq_property
+      vars:
+        QUINTIQ_PROPERTY_FILE: 'QTCEEditor.properties'
+        key_value_pairs:
+        - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
+
+  tasks:
+    
+    - name: Copy QTCE.exe as QTCEEditor.exe
+      win_copy:
+        src: '{{ quintiq_install_bin }}\QTCE.exe'
+        dest: '{{ quintiq_install_bin }}\QTCEEditor.exe'
+        remote_src: true
+
 - hosts: TCE
 
   become: yes
@@ -51,13 +66,27 @@
     - become_password: '=-09op[]":LKM<>?'
     - QUINTIQ_PROJECT: 'JUMBOHD'
     - QUINTIQ_VERSION: '6420'
+    - QUINTIQ_INSTALL_PATH: 'D:'
 
   roles:
     
     - role: install_quintiq_component
-      vars:
-        QUINTIQ_INSTALL_PATH: 'D:'
+      vars:        
         QUINTIQ_REPO:
           RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
           LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
           MODEL_PATH: 'D:'
+
+    - role: config_quintiq_component
+      vars:
+        QUINTIQ_COMPONENT: 'tce'
+        component_properties:
+        - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
+
+  tasks:
+    
+    - name: Copy QTCE.exe as QTCEEditor.exe
+      win_copy:
+        src: '{{ quintiq_install_bin }}\QTCE.exe'
+        dest: '{{ quintiq_install_bin }}\QTCEEditor.exe'
+        remote_src: true

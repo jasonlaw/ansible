@@ -1,0 +1,34 @@
+---
+- name: Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+      - QUINTIQ_PROPERTY_FILE = {{ QUINTIQ_PROPERTY_FILE }}
+
+- name: Set local variables
+  set_fact:        
+    property_file_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\etc\{{ QUINTIQ_PROPERTY_FILE }}'
+
+- name: Local variables
+  debug:
+    msg:
+        - "property_file_path: {{ property_file_path }}"  
+
+- name: Modify file content
+  win_shell: |
+    $path = "{{ property_file_path }}"
+    
+    $content = (Get-Content $path -Raw)
+    
+    {% for kv_pair in key_value_pairs %}
+    $content = $content -replace ('^(' + [regex]::Escape("{{ kv_pair.key }}") + '=).*$', '$1{{ kv_pair.new_value }}')
+    {% endfor %}
+    
+    $content | Set-Content $path
+  args:
+    executable: powershell.exe
+  vars:
+    key_value_pairs: "{{ key_value_pairs }}"
+  when: key_value_pairs | length > 0

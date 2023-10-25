@@ -12,6 +12,11 @@
   set_fact:        
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
+- name: subcomponent.yml - Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"  
+
 - name: subcomponent.yml - Set properties values for component {{ QUINTIQ_COMPONENT }}
   win_command: qk set {{ QUINTIQ_COMPONENT }} {{ QUINTIQ_SUBCOMPONENT }} {{ item.key }}={{ item.value }}
   args:
