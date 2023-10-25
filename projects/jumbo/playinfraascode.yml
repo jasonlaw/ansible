@@ -31,9 +31,9 @@
           LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
           MODEL_PATH: 'D:'
         QUINTIQ_WORKSPACE:
-          MODELS_PATH: 'D:\jumbo\models'
+          MODELS_PATH: 'D:\{{ QUINTIQ_PROJECT }}\shared\models'
           MODELS_PATH_CREATE: true   
-          VAR_PATH: 'D:\jumbo\var'
+          VAR_PATH: 'D:\{{ QUINTIQ_PROJECT }}\shared\var'
           VAR_PATH_CREATE: true   
 
     - role: config_quintiq_component
