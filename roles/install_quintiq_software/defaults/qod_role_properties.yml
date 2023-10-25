@@ -1,4 +1,9 @@
 qod_role_properties:
+  - { key: 'arg.custom', value: 'StandAloneStorageState' }
+  - { key: 'arg.internalstorageupgrade', value: true }
+  - { key: 'arg.logdays', value: 7 }
+  - { key: 'arg.webserver', value: true }
+  - { key: 'arg.webserversoap', value: true }
   - { key: 'connectiongroup.dbodbc1.connection0.protocol.securecommunication.authentication', value: 'Anonymous' }
   - { key: 'connectiongroup.dbodbc1.connection0.protocol.securecommunication.protocols', value: 'TLSv1.2' }
   - { key: 'connectiongroup.dbodbc1.connection0.protocol.securecommunication.strength', value: 'Normal' }
