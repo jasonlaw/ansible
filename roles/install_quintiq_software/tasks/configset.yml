@@ -1,0 +1,37 @@
+---
+- name: configset.yml - Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT  }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION  }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+
+- name: configset.yml - Set local variables
+  set_fact:        
+    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+
+- name: configset.yml - Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"  
+
+- name: configset.yml - New configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+  win_command: qk new server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}] --local
+  args:
+    chdir: '{{ install_bin }}'
+  ignore_errors: true
+
+- name: configset.yml - Set configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+  win_command: qk set server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+  args:
+    chdir: '{{ install_bin }}'
+  ignore_errors: true
+
+- name: configset.yml - Set qod role properties default values
+  win_command: qk set configset {{ item.key }}={{ item.value }} -- [Common,qod]
+  args:
+    chdir: '{{ install_bin }}'
+  loop: "{{ qod_role_properties }}"
+  when: >
+    item.key is defined and 
+    item.value is defined
