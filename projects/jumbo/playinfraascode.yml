@@ -12,6 +12,12 @@
     - QUINTIQ_INSTALL_PATH: 'D:'
     - quintiq_install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
+  pre_tasks:
+
+  - name: Print all available facts
+    ansible.builtin.debug:
+      var: ansible_facts
+
   roles:
     
     - role: install_quintiq_software
@@ -68,6 +74,12 @@
     - QUINTIQ_VERSION: '6420'
     - QUINTIQ_INSTALL_PATH: 'D:'
     - quintiq_install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+
+  pre_tasks:
+
+    - name: Print all available facts
+      ansible.builtin.debug:
+        var: ansible_facts
 
   roles:
     
