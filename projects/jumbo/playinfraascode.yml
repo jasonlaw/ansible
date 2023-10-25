@@ -67,6 +67,7 @@
     - QUINTIQ_PROJECT: 'JUMBOHD'
     - QUINTIQ_VERSION: '6420'
     - QUINTIQ_INSTALL_PATH: 'D:'
+    - quintiq_install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
   roles:
     
@@ -82,9 +83,10 @@
         QUINTIQ_COMPONENT: 'tce'
         component_properties:
         - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
+        - { key: 'connectiongroup.connectiongroup1.connection0.servername', value: "{{ hostvars['QAE'].ansible_host }}"}
 
   tasks:
-    
+  
     - name: Copy QTCE.exe as QTCEEditor.exe
       win_copy:
         src: '{{ quintiq_install_bin }}\QTCE.exe'
