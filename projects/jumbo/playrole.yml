@@ -3,9 +3,10 @@
 
   become: yes
   become_method: runas
-  become_user: dsone\svc_qodsqlcl
+  become_user: '{{ env_service_user }}' 
 
-  vars:
+  vars:  
+    become_password: '{{ env_service_user_pass }}'
     ROLE1_VAR1: "Playbook->vars"
 
   pre_tasks:

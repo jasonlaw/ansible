@@ -1,3 +1,4 @@
 env: test
 ansible_shell_type: powershell
+env_service_user: DSONE\svc_qodsqlcl
 ANSIBLE_VAULT_PASSWORD_FILE: ~/test_pass

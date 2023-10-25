@@ -3,9 +3,11 @@
 
   become: yes
   become_method: runas
-  become_user: dsone\jlw1
-  vars:
-    become_password: '=-09op[]":LKM<>?'
+  become_user: '{{ env_service_user }}' 
+
+  vars:  
+    - become_password: '{{ env_service_user_pass }}'
+
 
   tasks:
     - include_role:
