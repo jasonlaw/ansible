@@ -1,6 +1,10 @@
 ---
 - hosts: QAE
 
+  become: yes
+  become_method: runas
+  become_user: dsone\svc_qodsqlcl
+
   vars:
     ROLE1_VAR1: "Playbook->vars"
 
