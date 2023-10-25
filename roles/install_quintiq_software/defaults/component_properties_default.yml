@@ -1,4 +1,5 @@
-server_default_properties:   
+server_properties_default:   
+  - { key: 'domainmodel.datasetrecovery.recovery.password', value: 'tiger_recovery_password' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Anonymous' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.pem', value: 'QuintiqDHP.pem' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.protocols', value: 'TLSv1.2' }
