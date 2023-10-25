@@ -19,8 +19,6 @@
   include_tasks: configset.yml
   when: QUINTIQ_MODEL is defined
 
-- name: component_properties_default.yml
-  include_tasks: component_properties_default.yml
-  vars:
-    component: 'server'
+- name: server_properties_default.yml
+  include_tasks: server_properties_default.yml
   when: QUINTIQ_MODEL is defined

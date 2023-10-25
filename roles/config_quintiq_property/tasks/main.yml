@@ -14,12 +14,13 @@
 - name: Local variables
   debug:
     msg:
-      - "property_file_path: {{ property_file_path }}"  
+      - "property_file_path: {{ property_file_path }}"
 
 - name: Set properties values for file {{ QUINTIQ_PROPERTY_FILE }}
   win_lineinfile:
     path: '{{ property_file_path }}'
     regex: '^{{ item.key | regex_escape }}'
     line: '{{ item.key }}={{ item.value }}'
+    insertafter: EOF
   loop: "{{ key_value_pairs }}"
   when: item.key is defined and item.value is defined

@@ -15,7 +15,13 @@
     msg:
         - "install_bin: {{ install_bin }}"  
 
-- name: configset.yml - New configset [Common,qod,{{ ansible_env.COMPUTERNAME }}]
+- name: configset.yml - New configset role [Common,qod]
+  win_command: qk new server configset [Common,qod]
+  args:
+    chdir: '{{ install_bin }}'
+  ignore_errors: true
+
+- name: configset.yml - New configset local [Common,qod,{{ ansible_env.COMPUTERNAME }}]
   win_command: qk new server configset [Common,qod,{{ ansible_env.COMPUTERNAME }}] --local
   args:
     chdir: '{{ install_bin }}'
@@ -32,6 +38,8 @@
   args:
     chdir: '{{ install_bin }}'
   loop: "{{ qod_role_properties }}"
+  loop_control:
+    fail_fast: true  # Abort the loop on the first failure
   when: >
     item.key is defined and 
     item.value is defined
