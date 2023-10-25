@@ -6,7 +6,7 @@
       - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - QUINTIQ_REPO = {{ QUINTIQ_REPO }}
-      - copy_release_autoextract = {{ copy_release_autoextract }}
+      - copy_release_autoextract = {{ copy_release_autoextract | default('undefined') }}
 
 - name: copy_release.yml - Set local variables
   set_fact:        
