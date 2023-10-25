@@ -1,0 +1,32 @@
+---
+- name: default_server_settings.yml - Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+
+- name: default_server_settings.yml - Set local variables
+  set_fact:        
+    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+    default_server_properties: 
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.cipherfile', value: '""' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.keystore', value: '""' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Anonymous' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.pem', value: 'QuintiqDHP.pem' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.protocols', value: 'TLSv1.2' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.tcpipversion', value: 'IPv4' }
+
+- name: default_server_settings.yml - Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"  
+
+- name: default_server_settings.yml - Set server default properties values
+  win_command: qk set server {{ item.key }}={{ item.value }}
+  args:
+    chdir: '{{ install_bin }}'
+  loop: "{{ default_server_properties }}"
+  when: >
+    item.key is defined and 
+    item.value is defined

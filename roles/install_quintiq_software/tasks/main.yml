@@ -3,6 +3,14 @@
 - name: core.yml
   include_tasks: core.yml
 
+- name: default_server_settings.yml
+  include_tasks: default_server_settings.yml
+  when: QUINIQ_DEFAULT_SERVER_SETTINGS
+
+- name: default_server_settings.yml
+  include_tasks: default_server_settings.yml
+  when: QUINIQ_DEFAULT_TCE_SETTINGS
+
 - name: workspace.yml
   include_tasks: workspace.yml
   when: QUINTIQ_WORKSPACE is defined

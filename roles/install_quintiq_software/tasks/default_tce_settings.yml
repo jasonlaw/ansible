@@ -1,0 +1,37 @@
+---
+- name: default_tce_settings.yml - Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+
+- name: default_tce_settings.yml - Set local variables
+  set_fact:        
+    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+    default_tce_properties: 
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.cipherfile', value: '""' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.keystore', value: '""' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Nonsecure' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.pem', value: 'QuintiqDHP.pem' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.protocols', value: 'TLSv1.2' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.tcpipversion', value: 'IPv4' }
+      - { key: 'connectiongroup.connectiongroup1.connection0.compression', value: 'FastCompression' }
+      - { key: 'connectiongroup.connectiongroup1.connection0.protocol.securecommunication.authentication', value: 'Anonymous' }
+      - { key: 'connectiongroup.connectiongroup1.connection0.protocol.securecommunication.protocols', value: 'TLSv1.2' }
+      - { key: 'connectiongroup.connectiongroup1.connection0.protocol.securecommunication.strength', value: 'Normal' }
+      - { key: 'connectiongroup.connectiongroup1.connection0.protocol.streamtype', value: 'SECURESOCK_STREAM' }
+      
+- name: default_tce_settings.yml - Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"  
+
+- name: default_tce_settings.yml - Set tce default properties values
+  win_command: qk set tce {{ item.key }}={{ item.value }}
+  args:
+    chdir: '{{ install_bin }}'
+  loop: "{{ default_tce_properties }}"
+  when: >
+    item.key is defined and 
+    item.value is defined
