@@ -38,8 +38,6 @@
   args:
     chdir: '{{ install_bin }}'
   loop: "{{ qod_role_properties }}"
-  loop_control:
-    fail_fast: true  # Abort the loop on the first failure
   when: >
     item.key is defined and 
     item.value is defined

@@ -22,6 +22,4 @@
   args:
     chdir: '{{ install_bin }}'
   loop: "{{ quintiq_component_properties_default | subelements('[]') }}"
-  loop_control:
-    fail_fast: true  # Abort the loop on the first failure
   when: item.1.key is defined and item.1.value is defined

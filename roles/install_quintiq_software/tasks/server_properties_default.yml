@@ -20,6 +20,4 @@
   args:
     chdir: '{{ install_bin }}'
   loop: "{{ server_properties_default }}"
-  loop_control:
-    fail_fast: true  # Abort the loop on the first failure
   when: item.key is defined and item.value is defined
