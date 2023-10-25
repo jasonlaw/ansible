@@ -1,6 +1,6 @@
 [windows]
 QAE ansible_host=sdcvwdel41
-TCE ansible_host=sdcvwdel40
+TCE ansible_host=sdcvwdscdm01
 
 [windows:vars]
 env=prod
