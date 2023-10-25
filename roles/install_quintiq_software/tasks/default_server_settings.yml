@@ -10,8 +10,8 @@
   set_fact:        
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
     default_server_properties: 
-      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.cipherfile', value: '""' }
-      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.keystore', value: '""' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.keystore', value: '' }
+      - { key: 'serviceportgroup.serviceportgroup1.serviceport0.cipherfile', value: '' }      
       - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Anonymous' }
       - { key: 'serviceportgroup.serviceportgroup1.serviceport0.pem', value: 'QuintiqDHP.pem' }
       - { key: 'serviceportgroup.serviceportgroup1.serviceport0.protocols', value: 'TLSv1.2' }
