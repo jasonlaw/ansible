@@ -1,0 +1,3 @@
+env: prod
+ansible_shell_type: powershell
+ANSIBLE_VAULT_PASSWORD_FILE: ~/prod_pass

@@ -1,2 +1,3 @@
 env: dev
 ansible_shell_type: powershell
+ANSIBLE_VAULT_PASSWORD_FILE: ~/dev_pass
