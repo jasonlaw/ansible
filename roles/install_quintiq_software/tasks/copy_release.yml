@@ -23,7 +23,7 @@
 - name: copy_release.yml - Copy '{{ copy_release_src }}' into '{{ copy_release_path }}'
   win_copy: 
     src: '{{ copy_release_src }}'
-    dest: '{{ copy_release_dest }}'
+    dest: '{{ copy_release_path }}'
     creates: '{{ copy_release_dest }}'
     remote_src: true
 
