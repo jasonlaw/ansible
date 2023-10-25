@@ -12,8 +12,8 @@
   set_fact:        
     copy_release_src: '{{ QUINTIQ_REPO.RELEASE_PATH }}\{{ QUINTIQ_VERSION }}-all.zip'
     copy_release_path: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\resources\releases'
-    copy_release_dest: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\resources\releases\{{ QUINTIQ_VERSION }}-all.zip'
     copy_release_name: '{{ QUINTIQ_VERSION }}-all'
+    copy_release_name_zip: '{{ QUINTIQ_VERSION }}-all.zip'
 
 - name: copy_release.yml - Ensure the directory is present
   win_file:
@@ -24,12 +24,12 @@
   win_copy: 
     src: '{{ copy_release_src }}'
     dest: '{{ copy_release_path }}'
-    creates: '{{ copy_release_dest }}'
+    creates: '{{ copy_release_path }}\{{ copy_release_name_zip }}'
     remote_src: true
 
-- name: copy_release.yml - Unzip {{ copy_release_path }}\{{ copy_release_name }}.zip
+- name: copy_release.yml - Unzip {{ copy_release_path }}\{{ copy_release_name_zip }}
   win_unzip:
-    src: '{{ copy_release_path }}\{{ copy_release_name }}.zip'
+    src: '{{ copy_release_path }}\{{ copy_release_name_zip }}'
     dest: '{{ copy_release_path }}'
     creates: '{{ copy_release_path }}\{{ copy_release_name }}'
   when: copy_release_autoextract|bool
