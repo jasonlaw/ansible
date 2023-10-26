@@ -1,19 +1,19 @@
 ---
 
-- name: core.yml
-  include_tasks: core.yml
+# - name: core.yml
+#   include_tasks: core.yml
 
-- name: workspace.yml
-  include_tasks: workspace.yml
-  when: QUINTIQ_WORKSPACE is defined
+# - name: workspace.yml
+#   include_tasks: workspace.yml
+#   when: QUINTIQ_WORKSPACE is defined
 
-- name: license.yml
-  include_tasks: license.yml
-  when: QUINTIQ_SITEKEY is defined
+# - name: license.yml
+#   include_tasks: license.yml
+#   when: QUINTIQ_SITEKEY is defined
 
-- name: model.yml
-  include_tasks: model.yml
-  when: QUINTIQ_MODEL is defined
+# - name: model.yml
+#   include_tasks: model.yml
+#   when: QUINTIQ_MODEL is defined
 
 - name: configset.yml
   include_tasks: configset.yml
