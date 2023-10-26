@@ -17,6 +17,9 @@
     msg:
       - "install_bin: {{ install_bin }}"
 
+- debug:
+    var: component_properties
+
 - name: component_properties_default.yml - Set default properties values
   win_command: qk set {{ item.0 }} {{ item.1.key }}={{ item.1.value }}
   args:
