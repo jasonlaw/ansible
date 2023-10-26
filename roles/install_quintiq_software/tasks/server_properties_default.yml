@@ -16,7 +16,7 @@
       - "install_bin: {{ install_bin }}"
 
 - name: server_properties_default.yml - Set default properties values
-  win_command: qk set {{ component }} {{ item.key }}={{ item.value }}
+  win_command: qk set server {{ item.key }}={{ item.value }}
   args:
     chdir: '{{ install_bin }}'
   loop: "{{ server_properties_default }}"
