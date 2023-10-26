@@ -1,6 +1,6 @@
 wilfred_sifu: 'wilfred is a master'
-# server_properties_default:
-#   - { key: 'arg.custom', value: 'StandAloneStorageState' }
+server_properties_default:
+  - { key: 'arg.custom', value: 'StandAloneStorageState' }
 #   - { key: 'arg.internalstorageupgrade', value: 'true' }
 #   - { key: 'arg.logdays', value: 7 }
 #   - { key: 'arg.webserver', value: 'true' }
