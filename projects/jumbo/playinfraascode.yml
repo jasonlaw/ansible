@@ -6,11 +6,11 @@
   become_user: '{{ env_service_user }}' 
 
   vars:  
-    - become_password: '{{ env_service_user_pass }}'
-    - QUINTIQ_PROJECT: 'JUMBOHD'
-    - QUINTIQ_VERSION: '6420'    
-    - QUINTIQ_INSTALL_PATH: 'D:'
-    - quintiq_install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+    become_password: '{{ env_service_user_pass }}'
+    QUINTIQ_PROJECT: 'JUMBOHD'
+    QUINTIQ_VERSION: '6420'    
+    QUINTIQ_INSTALL_PATH: 'D:'
+    quintiq_install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
   pre_tasks:
 
