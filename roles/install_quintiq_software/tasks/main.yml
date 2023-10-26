@@ -18,7 +18,3 @@
 - name: configset.yml
   include_tasks: configset.yml
   when: QUINTIQ_MODEL is defined
-
-- name: server_properties_default.yml
-  include_tasks: server_properties_default.yml
-  when: QUINTIQ_MODEL is defined

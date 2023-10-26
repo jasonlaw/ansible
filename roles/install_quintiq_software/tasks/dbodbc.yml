@@ -1,0 +1,28 @@
+---
+- name: dbodbc.yml - Parameters info
+  debug:
+    msg:
+      - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
+      - QUINTIQ_VERSION = {{ QUINTIQ_VERSION }}
+      - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
+
+- name: dbodbc.yml - Set local variables
+  set_fact:        
+    install_prj: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}'
+    install_dest: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}'    
+    install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+
+- name: dbodbc.yml - Local variables
+  debug:
+    msg:
+        - "install_bin: {{ install_bin }}"  
+
+- name: dbodbc.yml - Prepare AuditTrail folder
+  win_file:
+    path: '{{ install_prj }}\AuditTrail'
+    state: directory
+
+- name: dbodbc.yml - Prepare DSS folder
+  win_file:
+    path: '{{ install_prj }}\DSS'
+    state: directory

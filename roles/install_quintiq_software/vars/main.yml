@@ -1,4 +1,5 @@
-qod_role_properties:
+server_properties_default:
+  # this part will store in qod role properties
   - { key: 'arg.custom', value: 'StandAloneStorageState' }
   - { key: 'arg.internalstorageupgrade', value: 'true' }
   - { key: 'arg.logdays', value: 7 }
@@ -18,13 +19,12 @@ qod_role_properties:
   - { key: 'domainmodel.mdsstoragedefinitionmanager.maxcolumnname', value: 128 }
   - { key: 'domainmodel.mdsstoragedefinitionmanager.maxtablename', value: 128 }
   - { key: 'domainmodel.mdsstoragedefinitionmanager.parameters', value: '"/datasource={{ QUINTIQ_PROJECT }} /user=sa /owner=dbo"' }
-
-server_properties_default:   
-  - { key: 'domainmodel.datasetrecovery.recovery.password', value: 'tiger_recovery_password' }
+  # this part will store in local qserver properties
+  - { key: 'domainmodel.datasetrecovery.recovery.password', value: "{{ ('{{ QUINTIQ_PROJECT }}:{{ env_tiger_pass }}' | b64encode).decode('utf-8') }}" }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Anonymous' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.pem', value: 'QuintiqDHP.pem' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.protocols', value: 'TLSv1.2' }
-  - { key: 'serviceportgroup.serviceportgroup1.serviceport0.tcpipversion', value: 'IPv4' }
+  - { key: 'serviceportgroup.serviceportgroup1.serviceport0.tcpipversion', value: 'IPv4' }  
 
 quintiq_component_properties_default:
   - tce:
