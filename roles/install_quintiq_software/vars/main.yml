@@ -19,8 +19,8 @@ server_properties_default:
   - { key: 'domainmodel.mdsstoragedefinitionmanager.maxcolumnname', value: 128 }
   - { key: 'domainmodel.mdsstoragedefinitionmanager.maxtablename', value: 128 }
   - { key: 'domainmodel.mdsstoragedefinitionmanager.parameters', value: '"/datasource={{ QUINTIQ_PROJECT }} /user=sa /owner=dbo"' }
-  # - { key: 'domainmodel.datasetrecovery.recovery.password', value: "{{ ('{{ QUINTIQ_PROJECT }}:{{ env_tiger_pass }}' | b64encode).decode('utf-8') }}" }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Anonymous' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.pem', value: 'QuintiqDHP.pem' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.protocols', value: 'TLSv1.2' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.tcpipversion', value: 'IPv4' } 
+  - { key: 'domainmodel.datasetrecovery.recovery.password', value: "{{ QUINTIQ_PROJECT ~ ':' ~ env_tiger_pass | b64encode | decode('utf-8') }}" }
