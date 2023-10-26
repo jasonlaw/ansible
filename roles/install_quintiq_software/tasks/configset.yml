@@ -33,7 +33,7 @@
     chdir: '{{ install_bin }}'
   ignore_errors: true
 
-- name: configset.yml - Set qod role properties default values
+- name: configset.yml - Set server properties default values
   win_command: qk set server {{ item.key }}={{ item.value }} --configset=[Common,qod]
   args:
     chdir: '{{ install_bin }}'

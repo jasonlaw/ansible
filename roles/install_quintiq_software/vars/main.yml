@@ -1,4 +1,3 @@
-wilfred_sifu: 'wilfred is a master'
 server_properties_default:
   - { key: 'arg.custom', value: 'StandAloneStorageState' }
   - { key: 'arg.internalstorageupgrade', value: 'true' }
@@ -24,3 +23,16 @@ server_properties_default:
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.protocols', value: 'TLSv1.2' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.tcpipversion', value: 'IPv4' } 
   - { key: 'domainmodel.datasetrecovery.recovery.password', value: "{{ ( QUINTIQ_PROJECT ~ ':' ~ env_tiger_pass ) | b64encode }}" }
+
+tce_properties_default:
+  - { key: 'serviceportgroup.serviceportgroup1.serviceport0.keystore', value: '' }
+  - { key: 'serviceportgroup.serviceportgroup1.serviceport0.cipherfile', value: '' }      
+  - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Nonsecure' }
+  - { key: 'serviceportgroup.serviceportgroup1.serviceport0.pem', value: 'QuintiqDHP.pem' }
+  - { key: 'serviceportgroup.serviceportgroup1.serviceport0.protocols', value: 'TLSv1.2' }
+  - { key: 'serviceportgroup.serviceportgroup1.serviceport0.tcpipversion', value: 'IPv4' }
+  - { key: 'connectiongroup.connectiongroup1.connection0.compression', value: 'FastCompression' }
+  - { key: 'connectiongroup.connectiongroup1.connection0.protocol.securecommunication.authentication', value: 'Anonymous' }
+  - { key: 'connectiongroup.connectiongroup1.connection0.protocol.securecommunication.protocols', value: 'TLSv1.2' }
+  - { key: 'connectiongroup.connectiongroup1.connection0.protocol.securecommunication.strength', value: 'Normal' }
+  - { key: 'connectiongroup.connectiongroup1.connection0.protocol.streamtype', value: 'SECURESOCK_STREAM' }
