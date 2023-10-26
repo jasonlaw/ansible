@@ -35,8 +35,7 @@
 
 - debug:
     var: 
-      - server_properties_default
-      - test123
+      - env_tiger_pass
 
 - name: configset.yml - Set qod role properties default values
   win_command: qk set server {{ item.key }}={{ item.value }} --configset=[Common,qod]
