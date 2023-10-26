@@ -5,8 +5,8 @@
     name: install_quintiq_software
     tasks_from: core.yml
 
-- name: install_quintiq_software\component_properties_default.yml
+- name: install_quintiq_software\component_default.yml
   include_role:
     name: install_quintiq_software
-    tasks_from: component_properties_default.yml
+    tasks_from: component_default.yml
 

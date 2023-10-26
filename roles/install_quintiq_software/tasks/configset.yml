@@ -37,7 +37,7 @@
   win_command: qk set server {{ item.key }}={{ item.value }} --configset=[Common,qod]
   args:
     chdir: '{{ install_bin }}'
-  loop: "{{ server_properties_default }}"
+  loop: "{{ server_default }}"
   when: >
     item.key is defined and 
     item.value is defined

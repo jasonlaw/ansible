@@ -1,4 +1,4 @@
-server_properties_default:
+server_default:
   - { key: 'arg.custom', value: 'StandAloneStorageState' }
   - { key: 'arg.internalstorageupgrade', value: 'true' }
   - { key: 'arg.logdays', value: 7 }
@@ -24,7 +24,7 @@ server_properties_default:
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.tcpipversion', value: 'IPv4' } 
   - { key: 'domainmodel.datasetrecovery.recovery.password', value: "{{ ( QUINTIQ_PROJECT ~ ':' ~ env_tiger_pass ) | b64encode }}" }
 
-tce_properties_default:
+tce_default:
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.keystore', value: '' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.cipherfile', value: '' }      
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Nonsecure' }

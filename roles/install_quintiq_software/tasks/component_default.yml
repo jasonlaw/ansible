@@ -1,5 +1,5 @@
 ---
-- name: component_properties_default.yml - Parameters info
+- name: component_default.yml - Parameters info
   debug:
     msg:
       - QUINTIQ_PROJECT = {{ QUINTIQ_PROJECT }}
@@ -7,12 +7,12 @@
       - QUINTIQ_INSTALL_PATH = {{ QUINTIQ_INSTALL_PATH }}
       - component = {{ component }}
 
-- name: component_properties_default.yml - Set local variables
+- name: component_default.yml - Set local variables
   set_fact:
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\\{{ QUINTIQ_PROJECT }}\\quintiq{{ QUINTIQ_VERSION }}\\bin'
-    component_properties: "{{ lookup('vars', component + '_properties_default' ) }}"
+    component_properties: "{{ lookup('vars', component + '_default' ) }}"
 
-- name: component_properties_default.yml - Local variables
+- name: component_default.yml - Local variables
   debug:
     msg:
       - "install_bin: {{ install_bin }}"
@@ -20,9 +20,9 @@
 - debug:
     var: component_properties
 
-- name: component_properties_default.yml - Set default properties values
-  win_command: qk set {{ item.0 }} {{ item.1.key }}={{ item.1.value }}
+- name: component_default.yml - Set default properties values
+  win_command: qk set {{ component }} {{ item.key }}={{ item.value }}
   args:
     chdir: '{{ install_bin }}'
   loop: "{{ component_properties }}"
-  when: item.1.key is defined and item.1.value is defined
+  when: item.key is defined and item.value is defined
