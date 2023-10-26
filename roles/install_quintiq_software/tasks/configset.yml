@@ -34,7 +34,9 @@
   ignore_errors: true
 
 - debug:
-    var: server_properties_default
+    var: 
+      - server_properties_default
+      - test123
 
 - name: configset.yml - Set qod role properties default values
   win_command: qk set server {{ item.key }}={{ item.value }} --configset=[Common,qod]

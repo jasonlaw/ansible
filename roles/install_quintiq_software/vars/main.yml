@@ -1,3 +1,5 @@
+test123: 'this is a test vars'
+
 server_properties_default:
   - { key: 'arg.custom', value: 'StandAloneStorageState' }
   - { key: 'arg.internalstorageupgrade', value: 'true' }
