@@ -4,9 +4,3 @@
   include_role:
     name: install_quintiq_software
     tasks_from: core.yml
-
-- name: install_quintiq_software\default_tce_settings.yml
-  include_role:
-    name: install_quintiq_software
-    tasks_from: default_tce_settings.yml
-  when: QUINIQ_DEFAULT_TCE_SETTINGS
