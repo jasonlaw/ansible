@@ -10,7 +10,7 @@
 - name: component_properties_default.yml - Set local variables
   set_fact:
     install_bin: '{{ QUINTIQ_INSTALL_PATH }}\\{{ QUINTIQ_PROJECT }}\\quintiq{{ QUINTIQ_VERSION }}\\bin'
-    component_properties: "{{ lookup('vars', component + '_properties_default' ) | default([]) }}"
+    component_properties: "{{ lookup('vars', component + '_properties_default' ) }}"
 
 - name: component_properties_default.yml - Local variables
   debug:
@@ -21,5 +21,5 @@
   win_command: qk set {{ item.0 }} {{ item.1.key }}={{ item.1.value }}
   args:
     chdir: '{{ install_bin }}'
-  loop: "{{ component_properties | subelements('[]') }}"
+  loop: "{{ component_properties }}"
   when: item.1.key is defined and item.1.value is defined

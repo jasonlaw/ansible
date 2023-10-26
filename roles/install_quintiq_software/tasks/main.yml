@@ -15,9 +15,9 @@
 #   include_tasks: model.yml
 #   when: QUINTIQ_MODEL is defined
 
-- name: configset.yml
-  include_tasks: configset.yml
-  when: QUINTIQ_MODEL is defined
+# - name: configset.yml
+#   include_tasks: configset.yml
+#   when: QUINTIQ_MODEL is defined
 
 - name: component_properties_default.yml\tce
   include_tasks: component_properties_default.yml
