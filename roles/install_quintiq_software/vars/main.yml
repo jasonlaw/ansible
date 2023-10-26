@@ -1,5 +1,4 @@
 server_properties_default:
-  # this part will store in qod role properties
   - { key: 'arg.custom', value: 'StandAloneStorageState' }
   - { key: 'arg.internalstorageupgrade', value: 'true' }
   - { key: 'arg.logdays', value: 7 }
@@ -19,7 +18,6 @@ server_properties_default:
   - { key: 'domainmodel.mdsstoragedefinitionmanager.maxcolumnname', value: 128 }
   - { key: 'domainmodel.mdsstoragedefinitionmanager.maxtablename', value: 128 }
   - { key: 'domainmodel.mdsstoragedefinitionmanager.parameters', value: '"/datasource={{ QUINTIQ_PROJECT }} /user=sa /owner=dbo"' }
-  # this part will store in local qserver properties
   - { key: 'domainmodel.datasetrecovery.recovery.password', value: "{{ ('{{ QUINTIQ_PROJECT }}:{{ env_tiger_pass }}' | b64encode).decode('utf-8') }}" }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.minimumsecurity', value: 'Anonymous' }
   - { key: 'serviceportgroup.serviceportgroup1.serviceport0.pem', value: 'QuintiqDHP.pem' }
