@@ -20,20 +20,21 @@
 
   roles:
     
-    - role: install_quintiq_software     
-      QUINTIQ_SITEKEY: '162002'        
-      QUINTIQ_MODEL: 
-        SOURCE: 'Quicosolution642.qproject'
-        NAME: 'Quicosolution'
-      QUINTIQ_REPO:
-        RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
-        LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
-        MODEL_PATH: 'D:'
-      QUINTIQ_WORKSPACE:
-        MODELS_PATH: 'D:\{{ QUINTIQ_PROJECT }}\shared\models'
-        MODELS_PATH_CREATE: true   
-        VAR_PATH: 'D:\{{ QUINTIQ_PROJECT }}\shared\var'
-        VAR_PATH_CREATE: true   
+    - role: install_quintiq_software
+      vars:
+        QUINTIQ_SITEKEY: '162002'        
+        QUINTIQ_MODEL: 
+          SOURCE: 'Quicosolution642.qproject'
+          NAME: 'Quicosolution'
+        QUINTIQ_REPO:
+          RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
+          LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
+          MODEL_PATH: 'D:'
+        QUINTIQ_WORKSPACE:
+          MODELS_PATH: 'D:\{{ QUINTIQ_PROJECT }}\shared\models'
+          MODELS_PATH_CREATE: true   
+          VAR_PATH: 'D:\{{ QUINTIQ_PROJECT }}\shared\var'
+          VAR_PATH_CREATE: true   
 
     # - role: config_quintiq_component
     #   vars:
