@@ -36,71 +36,71 @@
           VAR_PATH: 'D:\{{ QUINTIQ_PROJECT }}\shared\var'
           VAR_PATH_CREATE: true   
 
-    - role: config_quintiq_component
-      vars:
-        QUINTIQ_COMPONENT: 'server'
-        component_properties:
-        - { key: 'serviceportgroup.serviceportgroup1.serviceport0.port', value: 7000 }
+    # - role: config_quintiq_component
+    #   vars:
+    #     QUINTIQ_COMPONENT: 'server'
+    #     component_properties:
+    #     - { key: 'serviceportgroup.serviceportgroup1.serviceport0.port', value: 7000 }
     
-    - role: config_quintiq_component
-      vars:
-        QUINTIQ_COMPONENT: 'tce'
-        component_properties:
-        - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
+    # - role: config_quintiq_component
+    #   vars:
+    #     QUINTIQ_COMPONENT: 'tce'
+    #     component_properties:
+    #     - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
 
-    - role: config_quintiq_property
-      vars:
-        QUINTIQ_PROPERTY_FILE: 'QTCEEditor.properties'
-        key_value_pairs:
-        - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
+    # - role: config_quintiq_property
+    #   vars:
+    #     QUINTIQ_PROPERTY_FILE: 'QTCEEditor.properties'
+    #     key_value_pairs:
+    #     - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
 
-  tasks:
+  # tasks:
     
-    - name: Copy QTCE.exe as QTCEEditor.exe
-      win_copy:
-        src: '{{ quintiq_install_bin }}\QTCE.exe'
-        dest: '{{ quintiq_install_bin }}\QTCEEditor.exe'
-        remote_src: true
+  #   - name: Copy QTCE.exe as QTCEEditor.exe
+  #     win_copy:
+  #       src: '{{ quintiq_install_bin }}\QTCE.exe'
+  #       dest: '{{ quintiq_install_bin }}\QTCEEditor.exe'
+  #       remote_src: true
 
-- hosts: TCE
+# - hosts: TCE
 
-  become: yes
-  become_method: runas
-  become_user: dsone\jlw1  
+#   become: yes
+#   become_method: runas
+#   become_user: dsone\jlw1  
 
-  vars:  
-    - become_password: '=-09op[]":LKM<>?'
-    - QUINTIQ_PROJECT: 'JUMBOHD'
-    - QUINTIQ_VERSION: '6420'
-    - QUINTIQ_INSTALL_PATH: 'D:'
-    - quintiq_install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
+#   vars:  
+#     - become_password: '=-09op[]":LKM<>?'
+#     - QUINTIQ_PROJECT: 'JUMBOHD'
+#     - QUINTIQ_VERSION: '6420'
+#     - QUINTIQ_INSTALL_PATH: 'D:'
+#     - quintiq_install_bin: '{{ QUINTIQ_INSTALL_PATH }}\{{ QUINTIQ_PROJECT }}\quintiq{{ QUINTIQ_VERSION }}\bin'
 
-  pre_tasks:
+#   pre_tasks:
 
-    - name: Print all available facts
-      ansible.builtin.debug:
-        var: ansible_facts
+#     - name: Print all available facts
+#       ansible.builtin.debug:
+#         var: ansible_facts
 
-  roles:
+#   roles:
     
-    - role: install_quintiq_component
-      vars:        
-        QUINTIQ_REPO:
-          RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
-          LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
-          MODEL_PATH: 'D:'
+#     - role: install_quintiq_component
+#       vars:        
+#         QUINTIQ_REPO:
+#           RELEASE_PATH: '\\sdcvwdel40\QuintiqReleases'
+#           LICENSE_PATH: '\\sdcvwdel40\QuintiqLicenses'
+#           MODEL_PATH: 'D:'
 
-    - role: config_quintiq_component
-      vars:
-        QUINTIQ_COMPONENT: 'tce'
-        component_properties:
-        - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
-        - { key: 'connectiongroup.connectiongroup1.connection0.servername', value: "{{ hostvars['QAE'].ansible_host }}"}
+#     - role: config_quintiq_component
+#       vars:
+#         QUINTIQ_COMPONENT: 'tce'
+#         component_properties:
+#         - { key: 'connectiongroup.connectiongroup1.connection0.protocol.port', value: 7000 }
+#         - { key: 'connectiongroup.connectiongroup1.connection0.servername', value: "{{ hostvars['QAE'].ansible_host }}"}
 
-  tasks:
+#   tasks:
   
-    - name: Copy QTCE.exe as QTCEEditor.exe
-      win_copy:
-        src: '{{ quintiq_install_bin }}\QTCE.exe'
-        dest: '{{ quintiq_install_bin }}\QTCEEditor.exe'
-        remote_src: true
+#     - name: Copy QTCE.exe as QTCEEditor.exe
+#       win_copy:
+#         src: '{{ quintiq_install_bin }}\QTCE.exe'
+#         dest: '{{ quintiq_install_bin }}\QTCEEditor.exe'
+#         remote_src: true
